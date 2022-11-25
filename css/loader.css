@@ -1,0 +1,112 @@
+/*.body {
+    position: absolute;
+    background-color: #eee;
+    margin: 0;
+    border: 0;
+    margin-bottom: 0;
+    overflow-x: hidden;
+}*/
+
+.page-loader-wrapper {
+    position: fixed;
+    width: 100vw;
+    right: 0;
+    height: 105vh;
+    z-index: 9999999;
+    background-color: #007bff;
+}
+
+.page-loader-wrapper .text {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin: 0 0 100px;
+    color: rgba(255, 255, 255, .7);
+    text-transform: uppercase;
+    font-size: 11px;
+    font-family: sans-serif, helvetica;
+    letter-spacing: .5px;
+}
+
+.loader {
+    position: absolute;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 24px;
+}
+
+.loader .ball {
+    height: 8px;
+    width: 0;
+    background: white;
+    position: relative;
+    margin: 0;
+}
+
+.loader .ball:nth-child(1) {
+    -webkit-animation: ball 2s ease-in-out infinite;
+    animation: ball 2s ease-in-out infinite;
+}
+
+.loader .ball:nth-child(2) {
+    -webkit-animation: ball 2s ease-in-out .1s infinite;
+    animation: ball 2s ease-in-out .1s infinite;
+}
+
+.loader .ball:nth-child(3) {
+    -webkit-animation: ball 2s ease-in-out .2s infinite;
+    animation: ball 2s ease-in-out .2s infinite;
+}
+@-webkit-keyframes ball {
+    0% {
+        left: 0;
+        width: 0px;
+    }
+    25% {
+        left: 0;
+        width: 300px;
+    }
+    50% {
+        left: 300px;
+        width: 0px;
+    }
+    75% {
+        left: 0;
+        width: 300px;
+    }
+    100% {
+        left: 0;
+        width: 0px;
+    }
+}
+
+@keyframes ball {
+    0% {
+        left: 0;
+        width: 0px;
+    }
+    25% {
+        left: 0;
+        width: 300px;
+    }
+    50% {
+        left: 300px;
+        width: 0px;
+    }
+    75% {
+        left: 0;
+        width: 300px;
+    }
+    100% {
+        left: 0;
+        width: 0px;
+    }
+}
