@@ -34,10 +34,6 @@ if ($inicio > $fim) {
     $msg = "A hora final não pode ser menor que a hora atual";
     header("location: ../index.php?msg=$msg&acao=$acao");
 } elseif($inicio < $agora) {
-    
-    $acao = 1;
-    $msg = "A data de inicio não pode ser menor que a data atual, por favor cadastre outra data !";
-    header("location: ../index.php?msg=$msg&acao=$acao");
 } else {
     if ($dataFim < $dataInicio) {
         $acao = 1;
