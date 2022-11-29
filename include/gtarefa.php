@@ -1,4 +1,5 @@
 <?php
+
 include '../config/conexao.php';
 include '../config/func.php';
 
@@ -33,10 +34,10 @@ if ($inicio > $fim) {
     $acao = 1;
     $msg = "A hora final não pode ser menor que a hora atual";
     header("location: ../index.php?msg=$msg&acao=$acao");
-} elseif($inicio < $agora) {
-    
+} elseif ($fim < $inicio) {
+
     $acao = 1;
-    $msg = "A data de inicio não pode ser menor que a data atual, por favor cadastre outra data !";
+    $msg = "A data final não pode ser menor que a data inicio, por favor cadastre outra data";
     header("location: ../index.php?msg=$msg&acao=$acao");
 } else {
     if ($dataFim < $dataInicio) {
@@ -60,7 +61,7 @@ if ($inicio > $fim) {
         if (mysqli_query($con, $insertTarefa)) {
 
             $logTarefa = "INSERT INTO logtarefa values(null,
-                                                ' " . ucfirst($usuario) . " cadastrou uma tarefa no dia " . dataBuscaBanco($dataAtual) . ", para ser realizada até o dia " . dataBuscaBanco($dataFim) . " ás $horaFim ',
+                                                ' " . ucfirst($usuario) . " cadastrou uma tarefa no dia $dataAtual , para ser realizada até o dia " . dataBuscaBanco($dataFim) . " ás $horaFim ',
                                                 '$dataAtual',
                                                 '$horaAtual')";
             mysqli_query($con, $logTarefa);
