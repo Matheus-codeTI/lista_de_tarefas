@@ -1,5 +1,4 @@
 <?php
-
 include '../config/conexao.php';
 include '../config/func.php';
 
@@ -35,7 +34,6 @@ if ($inicio > $fim) {
     $msg = "A hora final não pode ser menor que a hora atual";
     header("location: ../index.php?msg=$msg&acao=$acao");
 } else {
-
     if ($dataFim < $dataInicio) {
         $acao = 1;
         $msg = "Data final é inferior ao dia de hoje, por favor cadastre outra data !";

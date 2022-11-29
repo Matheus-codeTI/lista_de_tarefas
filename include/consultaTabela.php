@@ -52,7 +52,7 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
             }
             ?>
         </td>
-        <!-- CAMPO REALIZAR TAREFA-->
+        <!-- REALIZAR TAREFA-->
         <td>
             <?php
             if ($dataAtual >= $dataFinal && $horaAtual > $HoraFinal) {
