@@ -40,11 +40,7 @@ if ($inicio > $fim) {
     $msg = "A data final não pode ser menor que a data inicio, por favor cadastre outra data";
     header("location: ../index.php?msg=$msg&acao=$acao");
 } else {
-    if ($dataFim < $dataInicio) {
-        $acao = 1;
-        $msg = "Data final é inferior ao dia de hoje, por favor cadastre outra data !";
-        header("location: ../index.php?msg=$msg&acao=$acao");
-    } elseif ($horaInicio > $horaFim) {
+    if ($horaInicio > $horaFim) {
         $acao = 1;
         $msg = "Hora inicio é menor que a hora atual, por favor cadastre outro horário !";
         header("location: ../index.php?msg=$msg&acao=$acao");
