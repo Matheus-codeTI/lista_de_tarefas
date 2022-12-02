@@ -160,7 +160,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                 }, 300);
 
 
-                const ctx = document.getElementById('myChart');
+                const ctx = document.getElementById('grafico');
 
                 new Chart(ctx, {
                     type: 'bar',
@@ -314,9 +314,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
         <div class="row my-3">
             <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
                 <div class="clearfix middle shadow-sm bg-white rounded p-4">
-                    <div class="chart-container" style="position: relative; width: 100%">
-                        <canvas id="myChart" width="290" height="75"></canvas>
-                    </div>
+                    <canvas class="chart-container" style="position: relative; height:40vh; width:80vw" id="grafico"></canvas>
                 </div>
             </div>
         </div>
