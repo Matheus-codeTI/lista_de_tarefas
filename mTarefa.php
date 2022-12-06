@@ -58,9 +58,9 @@
                             </select>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <small><label class="form-label"><span style="color: red;">*</span> Data inicio:</label></small>
+                            <small><label class="form-label my-2"><span style="color: red;">*</span> Data inicio:</label></small>
                             <div class="input-group date" data-provide="datepicker">
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-2">
                                     <span class="input-group-text" id="basic-addon1"><i class='bx bxs-calendar'></i></span>
                                     <input required="" type="text" autocomplete="off" placeholder="<?= $hoje ?>" class="form-control" name="datainicio">
                                     <div class="input-group-addon">
@@ -70,9 +70,9 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <small><label class="form-label"><span style="color: red;">*</span> Data final:</label></small>
+                            <small><label class="form-label my-2"><span style="color: red;">*</span> Data final:</label></small>
                             <div class="input-group date" data-provide="datepicker">
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-2">
                                     <span class="input-group-text" id="basic-addon1"><i class='bx bxs-calendar'></i></span>
                                     <input required="" type="text" id="DataFin" autocomplete="off" placeholder="<?= $hoje ?>" class="form-control" name="datafinal">
                                     <div class="input-group-addon">

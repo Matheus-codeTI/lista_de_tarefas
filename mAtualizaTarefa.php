@@ -53,9 +53,9 @@ $rowAtualizaTarefa = mysqli_fetch_array($queryAtualizaTarefa);
                 </select>
             </div>
             <div class="col-md-6">
-                <small><label class="form-label"><span style="color: red;">*</span> Data inicio:</label></small>
+                <small><label class="form-label my-2"><span style="color: red;">*</span> Data inicio:</label></small>
                 <div class="input-group date" data-provide="datepicker">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-2">
                         <span class="input-group-text" id="basic-addon1"><i class='bx bxs-calendar'></i></span>
                         <input required="" value="<?= databuscabanco($rowAtualizaTarefa[4]) ?>" type="text" autocomplete="off" class="form-control" name="datainicio">
                         <div class="input-group-addon">
@@ -65,9 +65,9 @@ $rowAtualizaTarefa = mysqli_fetch_array($queryAtualizaTarefa);
                 </div>
             </div>
             <div class="col-md-6">
-                <small><label class="form-label"><span style="color: red;">*</span> Data final:</label></small>
+                <small><label class="form-label my-2"><span style="color: red;">*</span> Data final:</label></small>
                 <div class="input-group date" data-provide="datepicker">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-2">
                         <span class="input-group-text" id="basic-addon1"><i class='bx bxs-calendar'></i></span>
                         <input required="" type="text" autocomplete="off" value="<?= databuscabanco($rowAtualizaTarefa[6]) ?>" class="form-control" name="datafinal">
                         <div class="input-group-addon">
@@ -85,7 +85,7 @@ $rowAtualizaTarefa = mysqli_fetch_array($queryAtualizaTarefa);
                 <input required="" type="time" value="<?= $rowAtualizaTarefa[7] ?>" name="horafinal" class="form-control">
             </div>
             <div class="col-md-12">
-                <small><label class="form-label my-2"> <b style="color: red">*</b> Tarefa:</label></small>
+                <small><label class="form-label"> <b style="color: red">*</b> Tarefa:</label></small>
                 <textarea name="tarefa" disabled="" class="form-control" aria-label="With textarea"><?= $rowAtualizaTarefa[3] ?></textarea>
             </div>
         </div>

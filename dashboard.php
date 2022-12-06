@@ -155,10 +155,6 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
         </style>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                setTimeout(() => {
-                    document.getElementById('pagina').style.display = 'none';
-                }, 300);
-
 
                 const ctx = document.getElementById('grafico');
 
@@ -218,7 +214,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 // this dataset is drawn on top
                                 order: 4
                             }],
-                        labels: <?= json_encode($labelUsuarios) ?>,
+                        labels: <?= json_encode($labelUsuarios + $labelPendentes + $labelAndamento + $labelRealizadas) ?>,
                     },
                     options: {
                         scales: {
@@ -229,6 +225,10 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                     }
                 });
             });
+//          TEMPO DE LOADER
+            setTimeout(() => {
+                document.getElementById('pagina').style.display = 'none';
+            }, 300);
         </script>
     </head>
     <!--NAVE LATERAL--> 
@@ -259,52 +259,69 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                 }
                 ?>
             </main>
-            <div class="col-lg-4 col-sm-12 col-md-12">
+            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
+                <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeUsuariosCadastrados">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                            <div>
+                                <h5 class="mb-4">
+                                    <?= $rowUsuarios[0] . " Usuários cadastrados" ?>
+                                </h5>
+                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Usuários cadastrados</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i style="font-size: 4rem;" class="bx bx-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
                 <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasAndamento">
                     <div class="card-body">
                         <div class="d-flex justify-content-between px-md-1">
                             <div>
-                                <h4 class="mb-4">
-                                    <?= $rowTarefasAndamento[0] . " Tarefas em andamento" ?>
-                                </h4>
-                                <p style="font-size: 1.2rem;" class="mb-0 cardTextColor"> Tarefas em andamento</p>
+                                <h5 class="mb-4">
+                                    <?= $rowTarefasAndamento[0] . " Tarefas Em andamento" ?>
+                                </h5>
+                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas em andamento</p>
                             </div>
                             <div class="align-self-center">
-                                <i style="font-size: 5rem;" class="bx bx-cog"></i>
+                                <i style="font-size: 4rem;" class="bx bx-cog"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-12 col-md-12">
+            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
                 <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasPendentes">
                     <div class="card-body">
                         <div class="d-flex justify-content-between px-md-1">
                             <div>
-                                <h4 class="mb-4">
+                                <h5 class="mb-4">
                                     <?= $rowTarefasPendentes[0] . " tarefas pendentes" ?>
-                                </h4>
-                                <p style="font-size: 1.2rem;" class="mb-0 cardTextColor">Numero de tarefas Pendentes</p>
+                                </h5>
+                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas Pendentes</p>
                             </div>
                             <div class="align-self-center">
-                                <i style="font-size: 5rem;" class="bx bx-calendar-x"></i>
+                                <i style="font-size: 4rem;" class="bx bx-calendar-x"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-12 col-md-12">
+            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
                 <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasRealizadas">
                     <div class="card-body">
                         <div class="d-flex justify-content-between px-md-1">
                             <div>
-                                <h4 class="mb-4">
+                                <h5 class="mb-4">
                                     <?= $rowTarefasRealizadas[0] . " tarefas realizadas" ?>
-                                </h4>
-                                <p style="font-size: 1.2rem;" class="mb-0 cardTextColor"> Número de tarefas realizadas</p>
+                                </h5>
+                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas realizadas</p>
                             </div>
                             <div class="align-self-center">
-                                <i style="font-size: 5rem;" class="bx bxs-calendar-check"></i>
+                                <i style="font-size: 4rem;" class="bx bxs-calendar-check"></i>
                             </div>
                         </div>
                     </div>
