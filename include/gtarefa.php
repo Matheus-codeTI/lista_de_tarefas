@@ -4,7 +4,7 @@ include '../config/conexao.php';
 include '../config/func.php';
 
 // PEGA A DATA ATUAL 
-dataBuscaBanco($dataAtual = date('d-m-y'));
+$dataAtual = date('y-m-d');
 
 // DEFINE O FUSO HORARIO COMO O HORARIO DE BRASILIA
 date_default_timezone_set('America/Sao_Paulo');
@@ -53,11 +53,11 @@ if ($inicio > $fim) {
                                     '$horaInicio',
                                     '" . dataBanco($dataFim) . "',
                                     '$horaFim',
-                                    'a')";
+                                    'p')";
         if (mysqli_query($con, $insertTarefa)) {
 
             $logTarefa = "INSERT INTO logtarefa values(null,
-                                                ' " . ucfirst($usuario) . " cadastrou uma tarefa no dia $dataAtual , para ser realizada até o dia " . dataBuscaBanco($dataFim) . " ás $horaFim ',
+                                                ' " . ucfirst($usuario) . " cadastrou uma tarefa no dia ". dataBuscaBanco($dataAtual)." , para ser realizada até o dia " . dataBuscaBanco($dataFim) . " ás $horaFim ',
                                                 '$dataAtual',
                                                 '$horaAtual')";
             mysqli_query($con, $logTarefa);

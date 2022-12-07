@@ -21,7 +21,7 @@
                 <div>
                     <a style="text-decoration: none" href="#" class="nav_logo"> 
                         <i class='bx bx-layer nav_logo-icon'></i>
-                        <span class="nav_logo-name">BBBootstrap</span>
+                        <span class="nav_logo-name">Lista de Tarefas</span>
                     </a>
                     <div class="nav_list">
                         <a style="text-decoration: none" href="index.php" class="nav_link "> 
@@ -34,10 +34,6 @@
                         </a>  
                     </div>
                 </div> 
-                <a style="text-decoration: none" href="#" class="nav_link">
-                    <i class='bx bx-log-out nav_icon'></i> 
-                    <span class="nav_name">SignOut</span> 
-                </a>
             </nav>
         </div>
     </div>

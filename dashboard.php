@@ -214,7 +214,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 // this dataset is drawn on top
                                 order: 4
                             }],
-                        labels: <?= json_encode($labelUsuarios + $labelPendentes + $labelAndamento + $labelRealizadas) ?>,
+                        labels: <?= json_encode($labelUsuarios) ?>,
                     },
                     options: {
                         scales: {

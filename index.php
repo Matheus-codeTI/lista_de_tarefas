@@ -5,7 +5,6 @@ include './config/conexao.php';
 include './config/func.php';
 
 $hoje = date('d/m/Y');
-
 ?>
 <html lang="pt-br">
     <head>
@@ -72,6 +71,11 @@ $hoje = date('d/m/Y');
                 background: transparent;
                 border-color: #f3ad06;
                 color: #f3ad06;
+            }
+            .badge.badge-default {
+                background: transparent;
+                border-color: #9A9A9A;
+                color: #9A9A9A;
             }
             *::-webkit-scrollbar{
                 width: 0;
@@ -178,15 +182,23 @@ $hoje = date('d/m/Y');
                     confirmButtonText: 'OK'
                 })
             }
-            function tarefaRealizada() {
+            function iniciaTarefa() {
                 Swal.fire({
-                    icon: 'error',
+                    title: 'Tarefa iniciada com sucesso!',
+                    text: 'Prossiga com a ação e click no botão',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+            }
+            function tarefaConcluida() {
+                Swal.fire({
+                    icon: 'success',
                     title: 'Essa tarefa já foi realizada!',
                     text: 'Assim que a tarefa é realizada, não tem como mudar os status da tarefa',
                     confirmButtonText: 'OK'
                 })
             }
-            function tarefaNaoRealizada() {
+            function tarefaExpirada() {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Essa tarefa não foi cumprida a tempo!',
@@ -236,7 +248,7 @@ $hoje = date('d/m/Y');
                         "status": status,
                     },
                     success: function (data) {
-                        realizaTarefa();
+                        iniciaTarefa();
                         buscaTabela();
                     },
                     error: function (xhr, er, index, anchor) {
