@@ -39,18 +39,18 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
         <th scope="row"><?= $rowTarefa[0] ?></th>
         <td scope="row"><?= $rowTarefa[1] ?></td>
         <td class="col-3"><?= $rowTarefa[2] ?></td>
-        <td scope="row"><?= databuscabanco($rowTarefa[3]) ?> | <?= $rowTarefa[4] ?></td>
-        <td scope="row"><?= dataBuscaBanco($rowTarefa[5]) ?> | <?= $rowTarefa[6] ?></td>
+        <td scope="row"><?= databuscabanco($rowTarefa[3]) ?> | <?= substr($rowTarefa[4], 0, -3) ?></td>
+        <td scope="row"><?= dataBuscaBanco($rowTarefa[5]) ?> | <?= substr($rowTarefa[6], 0, -3) ?></td>
         <td class="col-0">
             <?php
-            if ($rowTarefa[7] == 'p') {
-                echo "<span style='text-decoration: none' class='badge badge-warning'>Pendente <i class='bx bx-info-circle'></i></span>";
+            if ($rowTarefa[7] == 'e' || $status == 'e') {
+                echo "<span style='text-decoration: none;' class='badge badge-default'>Expirada <i class='bx bx-info-circle'></i></span>";
             } elseif ($rowTarefa[7] == 'a') {
                 echo "<span style='text-decoration: none' class='badge badge-info'>Andamento <i class= 'bx bx-cog'></i></span>";
             } elseif ($rowTarefa[7] == 'r') {
                 echo "<span style='text-decoration: none' class='badge badge-success'>Realizada <i class= 'bx bx-like'></i></span>";
-            } elseif ($rowTarefa[7] == 'e' || $status == 'e') {
-                echo "<span style='text-decoration: none' class='badge badge-default'>Expirada <i class='bx bx-info-circle'></i></span>";
+            } elseif ($rowTarefa[7] == 'p') {
+                echo "<span style='text-decoration: none' class='badge badge-warning'>Pendente <i class='bx bx-info-circle'></i></span>";
             }
             ?>
         </td>
@@ -59,21 +59,21 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
             <?php
             if ($dataAtual >= $dataFinal && $horaAtual > $HoraFinal) {
                 ?>
-                <button onclick="tarefaExpirada()" class="badge badge-warning">Tarefa expirada <i class='bx bx-info-circle'></i></button>
+                <button onclick="tarefaExpirada()" class="badge badge-warning">Tarefa expirada <i style="font-size: 17px;" class='bx bx-info-circle'></i></button>
                 <?php
             } else {
 
                 if ($rowTarefa[7] == 'p') {
                     ?>
-                    <button onclick="mudaStatusTarefa('<?= $rowTarefa[0] ?>', '<?= $rowTarefa[7] ?>')" class="badge badge-info">Iniciar Tarefa <i class='bx bx-play-circle' ></i></button>
+                    <button onclick="IniciarTarefa('<?= $rowTarefa[0] ?>', '<?= $rowTarefa[7] ?>')" class="badge badge-info">Iniciar Tarefa <i style="font-size: 17px;" class='bx bx-play-circle' ></i></button>
                     <?php
                 } elseif ($rowTarefa[7] == 'a') {
                     ?>
-                    <button onclick="mudaStatusTarefa('<?= $rowTarefa[0] ?>', '<?= $rowTarefa[7] ?>')" class="badge badge-success">Realizar Tarefa <i class='bx bx-play-circle' ></i></button>
+                    <button onclick="RealizarTarefa('<?= $rowTarefa[0] ?>', '<?= $rowTarefa[7] ?>')" class="badge badge-success">Realizar Tarefa <i style="font-size: 17px;" class='bx bx-calendar-check' ></i></button>
                     <?php
                 } elseif ($rowTarefa[7] == 'r') {
                     ?>
-                    <button onclick="tarefaConcluida()" class="badge badge-success">Concluída <i class='bx bx-check-circle'></i></button>
+                    <button onclick="tarefaConcluida()" class="badge badge-success">Concluída <i style="font-size: 17px;" class='bx bx-check-circle'></i></button>
                     <?php
                 }
             }

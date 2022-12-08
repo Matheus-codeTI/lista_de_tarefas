@@ -26,8 +26,7 @@ $atualizaTarefa = "UPDATE tarefa set
                                     datager = '" . dataBanco($datainicio) . "',
                                     horager = '{$horainicio}',
                                     datafim = '" . dataBanco($datafinal) . "',
-                                    horafim = '{$horafinal}',
-                                    status = 'a'
+                                    horafim = '{$horafinal}'
                             where idtarefa = '$idTarefa'";
 if (mysqli_query($con, $atualizaTarefa)) {
 

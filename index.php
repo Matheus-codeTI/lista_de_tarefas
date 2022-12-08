@@ -184,15 +184,15 @@ $hoje = date('d/m/Y');
             }
             function iniciaTarefa() {
                 Swal.fire({
-                    title: 'Tarefa iniciada com sucesso!',
+                    title: 'Tarefa Iniciada !',
                     text: 'Prossiga com a ação e click no botão',
-                    icon: 'success',
+                    icon: 'info',
                     confirmButtonText: 'OK'
                 })
             }
             function tarefaConcluida() {
                 Swal.fire({
-                    icon: 'success',
+                    icon: 'info',
                     title: 'Essa tarefa já foi realizada!',
                     text: 'Assim que a tarefa é realizada, não tem como mudar os status da tarefa',
                     confirmButtonText: 'OK'
@@ -206,7 +206,7 @@ $hoje = date('d/m/Y');
                     confirmButtonText: 'OK'
                 })
             }
-            function verificaTarefaExcluida() {
+            function TarefaExcluida() {
                 Swal.fire({
                     icon: 'success',
                     title: 'Tarefa excluída com sucesso!',
@@ -229,7 +229,8 @@ $hoje = date('d/m/Y');
                                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
                             },
                             destroy: true,
-                            "retrieve": true
+                            "retrieve": true,
+                            stateSave: true,
                         });
                     },
                     error: function (xhr, er, index, anchor) {
@@ -239,7 +240,7 @@ $hoje = date('d/m/Y');
                 });
             }
 
-            function mudaStatusTarefa(idtarefa, status) {
+            function IniciarTarefa(idtarefa, status) {
                 $.ajax({
                     url: './include/statusTarefa.php',
                     type: 'post',
@@ -249,6 +250,24 @@ $hoje = date('d/m/Y');
                     },
                     success: function (data) {
                         iniciaTarefa();
+                        buscaTabela();
+                    },
+                    error: function (xhr, er, index, anchor) {
+                        console.log(xhr.status);
+                        console.log('deu RUIM');
+                    }
+                });
+            }
+            function RealizarTarefa(idtarefa, status) {
+                $.ajax({
+                    url: './include/statusTarefa.php',
+                    type: 'post',
+                    data: {
+                        "idtarefa": idtarefa,
+                        "status": status,
+                    },
+                    success: function (data) {
+                        realizaTarefa();
                         buscaTabela();
                     },
                     error: function (xhr, er, index, anchor) {
@@ -297,7 +316,6 @@ $hoje = date('d/m/Y');
                     },
                     success: function (data) {
                         $("#realizada").html(data);
-                        console.log("DEU BOMM");
                     },
                     error: function (xhr, er, index, anchor) {
                         console.log(xhr.status);
@@ -319,7 +337,6 @@ $hoje = date('d/m/Y');
                             },
                             "order": [[0, "desc"]]
                         });
-                        console.log("DEU BOMM");
                     },
                     error: function (xhr, er, index, anchor) {
                         $('#historico').html('Error ' + xhr.status);
@@ -338,7 +355,7 @@ $hoje = date('d/m/Y');
                     },
                     success: function (data) {
                         buscaTabela();
-                        verificaTarefaExcluida();
+                        TarefaExcluida();
                     },
                     error: function (xhr, er, index, anchor) {
                         console.log(xhr.status);

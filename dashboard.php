@@ -17,10 +17,10 @@ $tarefasRealizadas = "select count(*) from tarefa where status = 'r'";
 $queryTarefasRealizadas = mysqli_query($con, $tarefasRealizadas);
 $rowTarefasRealizadas = mysqli_fetch_array($queryTarefasRealizadas);
 
-//TAREFAS PENDENTES
-$tarefasPendentes = "select count(*) from tarefa where status = 'p'";
-$queryTarefasPendentes = mysqli_query($con, $tarefasPendentes);
-$rowTarefasPendentes = mysqli_fetch_array($queryTarefasPendentes);
+//TAREFAS EXPIRADAS
+$tarefasExpiradas = "select count(*) from tarefa where status = 'e'";
+$queryTarefasExpiradas = mysqli_query($con, $tarefasExpiradas);
+$rowTarefasExpiradas = mysqli_fetch_array($queryTarefasExpiradas);
 
 // CONSULTA DO GRAFICO / BAR
 // GRAFICO QUANTIDADE DE USUARIOS CADASTRADOS 
@@ -37,16 +37,16 @@ while ($rowGrafico = mysqli_fetch_array($queryUsuarios)) {
 }
 
 // GRAFICO TAREFAS PENDENTES
-$consultaTarefasPendentes = "select 
+$consultaTarefasExpiradas = "select 
                                 datager,
                                 count(*) 
-                        from tarefa where status = 'p'";
-$queryTafPendentes = mysqli_query($con, $consultaTarefasPendentes);
-$labelPendentes = array();
-$rowGraficoPendentes = array();
-while ($rowGraficoTarefasPendentes = mysqli_fetch_array($queryTafPendentes)) {
-    $labelPendentes[] = dataBuscaBanco(substr($rowGraficoTarefasPendentes[0], -5));
-    $rowGraficoPendentes[] = $rowGraficoTarefasPendentes[1];
+                        from tarefa where status = 'e'";
+$queryTafExpiradas = mysqli_query($con, $consultaTarefasExpiradas);
+$labelExpirada = array();
+$rowGraficoExpiradas = array();
+while ($rowGraficoTarefasPendentes = mysqli_fetch_array($queryTafExpiradas)) {
+    $labelExpirada[] = dataBuscaBanco(substr($rowGraficoTarefasPendentes[0], -5));
+    $rowGraficoExpiradas[] = $rowGraficoTarefasPendentes[1];
 }
 
 // GRAFICO TAREFAS EM ANDAMENTO
@@ -133,10 +133,10 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                 color: rgb(88, 214, 141 );
                 stroke: rgb(88, 214, 141 ) !important;
             }
-            .quantidadeDeTarefasPendentes{
-                border-color: rgb(241, 196, 15 );
-                color: rgb(241, 196, 15 );
-                stroke: rgb(241, 196, 15 ) !important;
+            .quantidadeDeTarefasExpiradas{
+                border-color: rgb(121, 125, 127);
+                color: rgb(121, 125, 127);
+                stroke: rgb(121, 125, 127) !important;
             }
             .quantidadeDeUsuarios{
                 border-color: #5DADE2;
@@ -173,20 +173,8 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 borderWidth: 1,
                                 type: 'bar',
                                 // this dataset is drawn below
-                                order: 1
-                            }, {
-                                label: 'Tarefas Pendentes',
-                                data: <?= json_encode($rowGraficoPendentes) ?>,
-                                backgroundColor: [
-                                    'rgba(183, 149, 11, 0.2)',
-                                ],
-                                borderColor: [
-                                    'rgb(183, 149, 11)',
-                                ],
-                                borderWidth: 1,
-                                type: 'bar',
-                                // this dataset is drawn on top
-                                order: 2
+                                order: 1,
+                                labels: <?= json_encode($labelUsuarios) ?>,
                             }, {
                                 label: 'Tarefas em Andamento',
                                 data: <?= json_encode($rowGraficoAndamento) ?>,
@@ -199,7 +187,22 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 borderWidth: 1,
                                 type: 'bar',
                                 // this dataset is drawn on top
-                                order: 3
+                                order: 3,
+                                labels: <?= json_encode($labelAndamento) ?>,
+                            }, {
+                                label: 'Tarefas Expiradas',
+                                data: <?= json_encode($rowGraficoExpiradas) ?>,
+                                backgroundColor: [
+                                    'rgb(121, 125, 127, 0.2)',
+                                ],
+                                borderColor: [
+                                    'rgb(121, 125, 127)',
+                                ],
+                                borderWidth: 1,
+                                type: 'bar',
+                                // this dataset is drawn on top
+                                order: 2,
+                                labels: <?= json_encode($labelExpirada) ?>,
                             }, {
                                 label: 'Tarefas realizadas',
                                 data: <?= json_encode($rowGraficoRealizada) ?>,
@@ -277,6 +280,23 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                 </div>
             </div>
             <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
+                <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasExpiradas">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                            <div>
+                                <h5 class="mb-4">
+                                    <?= $rowTarefasExpiradas[0] . " tarefas Expiradas" ?>
+                                </h5>
+                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas Expiradas</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i style="font-size: 4rem;" class='bx bxs-time'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
                 <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasAndamento">
                     <div class="card-body">
                         <div class="d-flex justify-content-between px-md-1">
@@ -288,23 +308,6 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                             </div>
                             <div class="align-self-center">
                                 <i style="font-size: 4rem;" class="bx bx-cog"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
-                <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasPendentes">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between px-md-1">
-                            <div>
-                                <h5 class="mb-4">
-                                    <?= $rowTarefasPendentes[0] . " tarefas pendentes" ?>
-                                </h5>
-                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas Pendentes</p>
-                            </div>
-                            <div class="align-self-center">
-                                <i style="font-size: 4rem;" class="bx bx-calendar-x"></i>
                             </div>
                         </div>
                     </div>
