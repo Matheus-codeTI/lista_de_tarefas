@@ -228,9 +228,9 @@ $hoje = date('d/m/Y');
                             "language": {
                                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
                             },
-                            destroy: true,
+                            "destroy": true,
                             "retrieve": true,
-                            stateSave: true,
+                            "stateSave": true
                         });
                     },
                     error: function (xhr, er, index, anchor) {

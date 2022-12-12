@@ -8,9 +8,9 @@
                 if ($hr >= 12 && $hr < 18) {
                     $resp = "<em>Olá , bom dia! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
                 } else if ($hr >= 0 && $hr < 12) {
-                    $resp = "<em>Olá , bom noite! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                    $resp = "<em>Olá , boa noite! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
                 } else {
-                    $resp = "<em>Olá , bom tarde! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                    $resp = "<em>Olá , boa tarde! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
                 }
                 echo "$resp";
                 ?>
