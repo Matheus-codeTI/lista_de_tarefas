@@ -22,14 +22,14 @@ $queryTarefa = mysqli_query($con, $listaDeTarefas);
 while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
 
     $dataFinal = new DateTime($rowTarefa[5]);
-    $HoraFinal = new DateTime($rowTarefa[6]);
+    $horaFinal = new DateTime($rowTarefa[6]);
 
     $dataAtual = new DateTime($data);
     $horaAtual = new DateTime($hora);
 
 //    UPDATE STATUS
     $status = '';
-    if ($dataAtual >= $dataFinal && $horaAtual > $HoraFinal) {
+    if ($dataAtual >= $dataFinal && $horaAtual > $horaFinal) {
         $update = "update tarefa set status = 'e' where idtarefa = {$rowTarefa[0]}";
         $status = 'e';
         mysqli_query($con, $update);
@@ -57,7 +57,7 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
         <!-- REALIZAR TAREFA-->
         <td>
             <?php
-            if ($dataAtual >= $dataFinal && $horaAtual > $HoraFinal) {
+            if ($dataAtual >= $dataFinal && $horaAtual > $horaFinal) {
                 ?>
                 <button onclick="tarefaExpirada()" class="badge badge-warning">Tarefa expirada <i style="font-size: 17px;" class='bx bx-info-circle'></i></button>
                 <?php
@@ -86,7 +86,7 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
         <!-- CAMPO EDITAR--> 
         <td>
             <?php
-            if ($dataAtual >= $dataFinal && $horaAtual > $HoraFinal) {
+            if ($dataAtual >= $dataFinal && $horaAtual > $horaFinal) {
                 ?>
                 <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada"  class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
                 <?php
