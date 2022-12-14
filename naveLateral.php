@@ -4,13 +4,19 @@
             <div class="header_toggle"><i style="font-size: 25px;" class='bx bx-menu bx-x' id="header-toggle"></i></div>
             <div id="navbar-search" class="d-none d-sm-block d-flex justify-content-start">
                 <?php
-                $hr = date("H:i:s");
-                if ($hr >= 12 && $hr < 18) {
-                    $resp = "<em>Olá , bom dia! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
-                } else if ($hr >= 0 && $hr < 12) {
-                    $resp = "<em>Olá , boa noite! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
-                } else {
+                // DEFINE O FUSO HORARIO COMO O HORARIO DE BRASILIA
+                date_default_timezone_set('America/Sao_Paulo');
+                // CRIA UMA VARIAVEL E ARMAZENA A HORA ATUAL DO FUSO-HORÀRIO DEFINIDO (BRASÍLIA)
+                $hr = date('H:i:s', time());
+
+                if ($hr >= 0 && $hr < 6) {
+                    $resp = "<em>Olá , boa madrugada! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                } elseif ($hr >= 12 && $hr < 18) {
                     $resp = "<em>Olá , boa tarde! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                } elseif ($hr >= 0 && $hr < 12) {
+                    $resp = "<em>Olá , bom dia! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                } else {
+                    $resp = "<em>Olá , boa noite! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
                 }
                 echo "$resp";
                 ?>

@@ -36,7 +36,7 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
     }
     ?>
     <tr>
-        <th scope="row"><?= $rowTarefa[0] ?></th>
+        <td scope="row"><?= $rowTarefa[0] ?></td>
         <td scope="row"><?= $rowTarefa[1] ?></td>
         <td class="col-3"><?= $rowTarefa[2] ?></td>
         <td scope="row"><?= databuscabanco($rowTarefa[3]) ?> | <?= substr($rowTarefa[4], 0, -3) ?></td>
@@ -75,6 +75,10 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
                     ?>
                     <button onclick="tarefaConcluida()" class="badge badge-success">Concluída <i style="font-size: 17px;" class='bx bx-check-circle'></i></button>
                     <?php
+                } elseif ($rowTarefa[7] == 'e') {
+                    ?>
+                    <button onclick="tarefaExpirada()" class="badge badge-warning">Tarefa expirada <i style="font-size: 17px;" class='bx bx-info-circle'></i></button>
+                    <?php
                 }
             }
             ?>
@@ -97,6 +101,10 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
                     <button onclick="atualizaTarefa('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#Atualizatarefa" class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
                     <?php
                 } elseif ($rowTarefa[7] == 'r') {
+                    ?>
+                    <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada"  class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
+                    <?php
+                } elseif ($rowTarefa[7] == 'e') {
                     ?>
                     <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada"  class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
                         <?php

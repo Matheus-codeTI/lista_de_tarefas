@@ -13,7 +13,7 @@
                             <small><label class="form-label"><b style="color: red"> *</b> Tipo de tarefa</label></small>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class='bx bxs-detail'></i></span>
-                                <input required="" type="text" placeholder="Urgente / importante / prioridade" name="tipotarefa" class="form-control">
+                                <input required="" type="text" placeholder="Urgente / no prazo / Emergencias " name="tipotarefa" class="form-control">
                             </div>
                         </div>
                     </div>
