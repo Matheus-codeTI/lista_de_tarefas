@@ -258,6 +258,7 @@ $hoje = date('d/m/Y');
                     }
                 });
             }
+            
             function RealizarTarefa(idtarefa, status) {
                 $.ajax({
                     url: './include/statusTarefa.php',
