@@ -2,23 +2,35 @@
 include './config/conexao.php';
 include './config/func.php';
 
+$hoje = date('d/m/Y');
+$dataInicio = isset($_GET['inicio']) ? databanco($_GET['inicio']) : '';
+$dataFim = isset($_GET['fim']) ? databanco($_GET['fim']) : '';
+
 // USUARIOS CADASTRADOS 
-$usuariosCadastrados = "SELECT count(*) FROM tarefa";
+$usuariosCadastrados = "SELECT 
+                            count(*) 
+                        FROM tarefa";
 $queryTarefa = mysqli_query($con, $usuariosCadastrados);
 $rowUsuarios = mysqli_fetch_array($queryTarefa);
 
 // TAREFAS EM ANDAMENTO
-$tarefasAndamento = "select count(*) from tarefa where status = 'a'";
+$tarefasAndamento = "select 
+                        count(*) 
+                    from tarefa where status = 'a'";
 $queryTarefasAndamento = mysqli_query($con, $tarefasAndamento);
 $rowTarefasAndamento = mysqli_fetch_array($queryTarefasAndamento);
 
 // TAREFAS REALIZADAS
-$tarefasRealizadas = "select count(*) from tarefa where status = 'r'";
+$tarefasRealizadas = "select 
+                        count(*) 
+                from tarefa where status = 'r'";
 $queryTarefasRealizadas = mysqli_query($con, $tarefasRealizadas);
 $rowTarefasRealizadas = mysqli_fetch_array($queryTarefasRealizadas);
 
 //TAREFAS EXPIRADAS
-$tarefasExpiradas = "select count(*) from tarefa where status = 'e'";
+$tarefasExpiradas = "select 
+                        count(*) 
+                from tarefa where status = 'e'";
 $queryTarefasExpiradas = mysqli_query($con, $tarefasExpiradas);
 $rowTarefasExpiradas = mysqli_fetch_array($queryTarefasExpiradas);
 
@@ -27,7 +39,8 @@ $rowTarefasExpiradas = mysqli_fetch_array($queryTarefasExpiradas);
 $consultaTarefasUsuarios = "SELECT
                                 datager,
                                 count(*) 
-                        FROM tarefa";
+                        FROM tarefa WHERE datager BETWEEN '$dataInicio' AND '$dataFim'   
+                        group by datager";
 $queryUsuarios = mysqli_query($con, $consultaTarefasUsuarios);
 $labelUsuarios = array();
 $rowGraficoUsuarios = array();
@@ -35,12 +48,12 @@ while ($rowGrafico = mysqli_fetch_array($queryUsuarios)) {
     $labelUsuarios[] = dataBuscaBanco(substr($rowGrafico[0], -5));
     $rowGraficoUsuarios[] = $rowGrafico[1];
 }
-
 // GRAFICO TAREFAS PENDENTES
 $consultaTarefasExpiradas = "select 
-                                datager,
-                                count(*) 
-                        from tarefa where status = 'e'";
+                                    datager,
+                                    count(*) 
+                        from tarefa where datager BETWEEN '$dataInicio' AND '$dataFim' 
+                        and status = 'e' group by datager";
 $queryTafExpiradas = mysqli_query($con, $consultaTarefasExpiradas);
 $labelExpirada = array();
 $rowGraficoExpiradas = array();
@@ -53,7 +66,7 @@ while ($rowGraficoTarefasPendentes = mysqli_fetch_array($queryTafExpiradas)) {
 $consultaTarefasAndamento = "select 
                                 datager,
                                 count(*) 
-                        from tarefa where status = 'a'";
+                        from tarefa where datager BETWEEN '$dataInicio' AND '$dataFim' and status = 'a'  group by datager";
 $queryTafAndamento = mysqli_query($con, $consultaTarefasAndamento);
 $labelAndamento = array();
 $rowGraficoAndamento = array();
@@ -67,7 +80,7 @@ while ($rowGraficoTarefasAndamento = mysqli_fetch_array($queryTafAndamento)) {
 $consultaTarefasRealizadas = "select 
                                 datager,
                                 count(*) 
-                        from tarefa where status = 'r'";
+                        from tarefa where datager BETWEEN '" . dataBanco($dataInicio) . "' AND '" . dataBanco($dataFim) . "' and status = 'r'  group by datager";
 $queryTafRealizadas = mysqli_query($con, $consultaTarefasRealizadas);
 $labelRealizadas = array();
 $rowGraficoRealizada = array();
@@ -155,6 +168,16 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
         </style>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                $('#datepicker').datepicker({
+                    format: "dd/mm/yyyy",
+                    todayBtn: "linked",
+                    forceParse: false,
+                    autoclose: true,
+                    todayHighlight: true,
+                    language: 'pt-br',
+                    zIndexOffset: 99999999,
+                    orientation: 'bottom'
+                });
 
                 const ctx = document.getElementById('grafico');
 
@@ -165,7 +188,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 label: 'Usuários cadastrados',
                                 data: <?= json_encode($rowGraficoUsuarios) ?>,
                                 backgroundColor: [
-                                    'rgba(118, 68, 138, 0.2)',
+                                    'rgba(108, 52, 131, 0.2)',
                                 ],
                                 borderColor: [
                                     'rgb(118, 68, 138)',
@@ -174,7 +197,6 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 type: 'bar',
                                 // this dataset is drawn below
                                 order: 1,
-                                labels: <?= json_encode($labelUsuarios) ?>,
                             }, {
                                 label: 'Tarefas em Andamento',
                                 data: <?= json_encode($rowGraficoAndamento) ?>,
@@ -188,7 +210,6 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 type: 'bar',
                                 // this dataset is drawn on top
                                 order: 3,
-                                labels: <?= json_encode($labelAndamento) ?>,
                             }, {
                                 label: 'Tarefas Expiradas',
                                 data: <?= json_encode($rowGraficoExpiradas) ?>,
@@ -202,7 +223,6 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 type: 'bar',
                                 // this dataset is drawn on top
                                 order: 2,
-                                labels: <?= json_encode($labelExpirada) ?>,
                             }, {
                                 label: 'Tarefas realizadas',
                                 data: <?= json_encode($rowGraficoRealizada) ?>,
@@ -228,6 +248,34 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                     }
                 });
             });
+            function VerificaData() {
+                let Msg = 'Limite de data indisponível , selecione no período de 30 dias';
+                let button = $("#buscar");
+                let datainicio = $("#dataInicio").val().split('/');
+                let datafim = $("#dataFim").val().split('/');
+
+                datainicio = new Date(datainicio[2], datainicio[1] - 1, datainicio[0]);
+                datafim = new Date(datafim[2], datafim[1] - 1, datafim[0]);
+
+                const diferenca = Math.abs(datainicio.getTime() - datafim.getTime()); // Subtrai uma data pela outra
+                const dias = Math.ceil(diferenca / (1000 * 60 * 60 * 24));
+
+
+                if (dias > 30) {
+                    button.attr('disabled', 'disabled');
+                    $("#resposta-verificacao").html(Msg);
+                    $("#resposta-verificacao").show();
+                } else {
+                    button.removeAttr('disabled');
+                    $("#resposta-verificacao").hide();
+                }
+            }
+
+
+            function trocaBotaoBuscar() {
+                $("#buscarDisabled").show();
+                $("#buscar").hide()
+            }
 //          TEMPO DE LOADER
             setTimeout(() => {
                 document.getElementById('pagina').style.display = 'none';
@@ -248,91 +296,116 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
             <div class="text">Carregando...</div>
         </div>
 
-        <div class="row">
-            <main class="breadcrumb-item active" style="margin-top: 70px;">
-                <div class="col-lg-6">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><i style="color: green; font-size: 20px; margin-right: 08px;" class="bx bxs-dashboard mt-4"></i> </li>                            
-                        <li style="font-size: 14px;" class="mt-4">/ Dashboard </li>
-                    </ul>
-                </div>
-                <?php
-                if (isset($_GET['acao']) && $_GET['msg']) {
-                    echo montaAlert($_GET['acao'], $_GET['msg']);
-                }
-                ?>
-            </main>
-            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
-                <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeUsuariosCadastrados">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between px-md-1">
-                            <div>
-                                <h5 class="mb-4">
-                                    <?= $rowUsuarios[0] . " Usuários cadastrados" ?>
-                                </h5>
-                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Usuários cadastrados</p>
+        <div class="block-header mb-0">
+            <div class="row">
+                <main class="breadcrumb-item active mt-3">
+                    <div class="mt-5">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><i style="color: green; font-size: 20px; margin-right: 08px;" class="bx bxs-dashboard mt-4"></i> </li>                            
+                            <li style="font-size: 14px;" class="mt-4">/ Dashboard </li>
+                        </ul>
+                        <?php
+                        if (isset($_GET['acao']) && $_GET['msg']) {
+                            echo montaAlert($_GET['acao'], $_GET['msg']);
+                        }
+                        ?>
+                        <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-end my-3">
+                            <div class="form-group"> 
+                                <form action="dashboard.php" method="GET">
+                                    <label class="form-label"><small><b>Período:</b></small></label>
+                                    <span class="badge bg-secondary mb-2 float-end" style="color: white; text-transform: Capitalize; font-size: 13px" id="resposta-verificacao"></span>
+                                    <div class="input-daterange input-group flex-nowrap" id='datepicker' data-provide="datepicker">
+                                        <span class="input-group-text" id="addon-wrapping"><i class="bx bx-calendar" aria-hidden="true"></i></span>
+                                        <input id="dataInicio" value="<?= dataBuscaBanco($dataInicio) ?>" placeholder="<?= $hoje ?>" onchange="VerificaData()" name="inicio" type="text" class="input-sm data form-control" autocomplete="off">
+
+                                        <small class="input-group-addon range-to mx-2 mt-2"><b> até </b></small>
+
+                                        <span class="input-group-text" id="addon-wrapping"><i class="bx bx-calendar" aria-hidden="true"></i></span>
+                                        <input id="dataFim" name="fim" value="<?= dataBuscaBanco($dataFim) ?>" placeholder="<?= $hoje ?>" onchange="VerificaData()" type="text" class="input-sm data form-control" autocomplete="off">
+                                        <button id="buscarDisabled" type="submit" style="display: none;"  disabled="disabled" class="btn btn-primary  ml-2"><i class="fa fa-refresh fa-spin"></i> Carregando...</button>
+                                        <button id="buscar" type="submit" onclick="trocaBotaoBuscar()" class="btn btn-outline-primary  ml-5"> Buscar <i class='bx bx-search mr-2 mb-1'></i></button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="align-self-center">
-                                <i style="font-size: 4rem;" class="bx bx-user"></i>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="row">
+                <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
+                    <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeUsuariosCadastrados">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h5 class="mb-4">
+                                        <?= $rowUsuarios[0] . " Usuários cadastrados" ?>
+                                    </h5>
+                                    <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Usuários cadastrados</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i style="font-size: 4rem;" class="bx bx-user"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
-                <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasExpiradas">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between px-md-1">
-                            <div>
-                                <h5 class="mb-4">
-                                    <?= $rowTarefasExpiradas[0] . " tarefas Expiradas" ?>
-                                </h5>
-                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas Expiradas</p>
-                            </div>
-                            <div class="align-self-center">
-                                <i style="font-size: 4rem;" class='bx bxs-time'></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
-                <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasAndamento">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between px-md-1">
-                            <div>
-                                <h5 class="mb-4">
-                                    <?= $rowTarefasAndamento[0] . " Tarefas Em andamento" ?>
-                                </h5>
-                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas em andamento</p>
-                            </div>
-                            <div class="align-self-center">
-                                <i style="font-size: 4rem;" class="bx bx-cog"></i>
+                <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
+                    <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasExpiradas">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h5 class="mb-4">
+                                        <?= $rowTarefasExpiradas[0] . " tarefas Expiradas" ?>
+                                    </h5>
+                                    <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas Expiradas</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i style="font-size: 4rem;" class='bx bx-time'></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
-                <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasRealizadas">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between px-md-1">
-                            <div>
-                                <h5 class="mb-4">
-                                    <?= $rowTarefasRealizadas[0] . " tarefas realizadas" ?>
-                                </h5>
-                                <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas realizadas</p>
+                <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
+                    <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasAndamento">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h5 class="mb-4">
+                                        <?= $rowTarefasAndamento[0] . " Tarefas Em andamento" ?>
+                                    </h5>
+                                    <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas em andamento</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i style="font-size: 4rem;" class="bx bx-cog bx-spin"></i>
+                                </div>
                             </div>
-                            <div class="align-self-center">
-                                <i style="font-size: 4rem;" class="bx bxs-calendar-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
+                    <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasRealizadas">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h5 class="mb-4">
+                                        <?= $rowTarefasRealizadas[0] . " tarefas realizadas" ?>
+                                    </h5>
+                                    <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas realizadas</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i style="font-size: 4rem;" class="bx bxs-calendar-check"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row my-3">
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+        <div class="row mb-4">
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="clearfix middle shadow-sm bg-white rounded p-4">
                     <canvas class="chart-container" style="position: relative; height:40vh; width:80vw" id="grafico"></canvas>
                 </div>
