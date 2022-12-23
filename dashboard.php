@@ -6,6 +6,18 @@ $hoje = date('d/m/Y');
 $dataInicio = isset($_GET['inicio']) ? databanco($_GET['inicio']) : '';
 $dataFim = isset($_GET['fim']) ? databanco($_GET['fim']) : '';
 
+$sqlTarefa = "select
+                    datager,
+                    count(*)
+            from tarefa where datafim = '" . dataBanco($hoje) . "'";
+$queryTarefaDoDia = mysqli_query($con, $sqlTarefa);
+$labelTarefas = array();
+$totalDeTarefas = array();
+while ($rowTarefa = mysqli_fetch_array($queryTarefaDoDia)) {
+    $labelTarefas[] = dataBuscaBanco($rowTarefa[0]);
+    $totalDeTarefas[] = $rowTarefa[1];
+}
+
 // USUARIOS CADASTRADOS 
 $usuariosCadastrados = "SELECT 
                             count(*) 
@@ -27,7 +39,7 @@ $tarefasRealizadas = "select
 $queryTarefasRealizadas = mysqli_query($con, $tarefasRealizadas);
 $rowTarefasRealizadas = mysqli_fetch_array($queryTarefasRealizadas);
 
-//TAREFAS EXPIRADAS
+// TAREFAS EXPIRADAS
 $tarefasExpiradas = "select 
                         count(*) 
                 from tarefa where status = 'e'";
@@ -39,8 +51,7 @@ $rowTarefasExpiradas = mysqli_fetch_array($queryTarefasExpiradas);
 $consultaTarefasUsuarios = "SELECT
                                 datager,
                                 count(*) 
-                        FROM tarefa WHERE datager BETWEEN '$dataInicio' AND '$dataFim'   
-                        group by datager";
+                    FROM tarefa WHERE datager BETWEEN '$dataInicio' AND '$dataFim' group by datager";
 $queryUsuarios = mysqli_query($con, $consultaTarefasUsuarios);
 $labelUsuarios = array();
 $rowGraficoUsuarios = array();
@@ -48,6 +59,7 @@ while ($rowGrafico = mysqli_fetch_array($queryUsuarios)) {
     $labelUsuarios[] = dataBuscaBanco(substr($rowGrafico[0], -5));
     $rowGraficoUsuarios[] = $rowGrafico[1];
 }
+
 // GRAFICO TAREFAS PENDENTES
 $consultaTarefasExpiradas = "select 
                                     datager,
@@ -74,7 +86,6 @@ while ($rowGraficoTarefasAndamento = mysqli_fetch_array($queryTafAndamento)) {
     $labelAndamento[] = dataBuscaBanco(substr($rowGraficoTarefasAndamento[0], -5));
     $rowGraficoAndamento[] = $rowGraficoTarefasAndamento[1];
 }
-
 
 // GRAFICO DE TAREDAS REALIZADAS
 $consultaTarefasRealizadas = "select 
@@ -179,13 +190,14 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                     orientation: 'bottom'
                 });
 
-                const ctx = document.getElementById('grafico');
+                const totalDeTarefas = document.getElementById('totalDeTarefas');
+                const tarefasDoDia = document.getElementById('tarefasDoDia');
 
-                new Chart(ctx, {
+                new Chart(totalDeTarefas, {
                     type: 'bar',
                     data: {
                         datasets: [{
-                                label: 'Usuários cadastrados',
+                                label: 'Tarefas cadastradas',
                                 data: <?= json_encode($rowGraficoUsuarios) ?>,
                                 backgroundColor: [
                                     'rgba(108, 52, 131, 0.2)',
@@ -247,7 +259,36 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                         }
                     }
                 });
+
+                new Chart(tarefasDoDia, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                                label: 'Tarefas cadastradas para hoje ',
+                                data: <?= json_encode($totalDeTarefas) ?>,
+                                backgroundColor: [
+                                    'rgba(108, 52, 131, 0.2)',
+                                ],
+                                borderColor: [
+                                    'rgb(118, 68, 138)',
+                                ],
+                                borderWidth: 1,
+                                type: 'bar',
+                                // this dataset is drawn below
+                                order: 1,
+                            }],
+                        labels: <?= json_encode($labelTarefas) ?>,
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
             });
+
             function VerificaData() {
                 let Msg = 'Limite de data indisponível , selecione no período de 30 dias';
                 let button = $("#buscar");
@@ -322,8 +363,8 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
 
                                         <span class="input-group-text" id="addon-wrapping"><i class="bx bx-calendar" aria-hidden="true"></i></span>
                                         <input id="dataFim" name="fim" value="<?= dataBuscaBanco($dataFim) ?>" placeholder="<?= $hoje ?>" onchange="VerificaData()" type="text" class="input-sm data form-control" autocomplete="off">
-                                        <button id="buscarDisabled" type="submit" style="display: none;"  disabled="disabled" class="btn btn-primary  ml-2"><i class="fa fa-refresh fa-spin"></i> Carregando...</button>
-                                        <button id="buscar" type="submit" onclick="trocaBotaoBuscar()" class="btn btn-outline-primary  ml-5"> Buscar <i class='bx bx-search mr-2 mb-1'></i></button>
+                                        <button id="buscarDisabled" type="submit" style="display: none;"  disabled="disabled" class="btn btn-primary  ml-2"><i style="font-size: 19px;" class="bx bx-refresh bx-spin"></i> Carregando...</button>
+                                        <button id="buscar" type="submit" onclick="trocaBotaoBuscar()" class="btn btn-outline-primary  ml-5"><i class='bx bx-search mr-2 mb-1'></i> Buscar </button>
                                     </div>
                                 </form>
                             </div>
@@ -334,30 +375,56 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
         </div>
         <div class="clearfix">
             <div class="row">
-                <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
-                    <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeUsuariosCadastrados">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between px-md-1">
-                                <div>
-                                    <h5 class="mb-4">
-                                        <?= $rowUsuarios[0] . " Usuários cadastrados" ?>
-                                    </h5>
-                                    <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Usuários cadastrados</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i style="font-size: 4rem;" class="bx bx-user"></i>
+                <?php
+                if (isset($_GET['inicio'])) {
+                    ?>
+                    <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
+                        <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeUsuariosCadastrados">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between px-md-1">
+                                    <div>
+                                        <h5 class="mb-4">
+                                            <?= $rowUsuarios[0] . " Tarefas no Total" ?>
+                                        </h5>
+                                        <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Total de tarefas cadastradas</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i style="font-size: 4rem;" class="bx bx-user"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <?php
+                } else {
+                    ?>
+                    <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
+                        <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeUsuariosCadastrados">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between px-md-1">
+                                    <div>
+                                        <h5 class="mb-4">
+                                            <?= $totalDeTarefas[0] . " Tarefas para Hoje" ?>
+                                        </h5>
+                                        <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas cadastradas para hoje </p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i style="font-size: 4rem;" class="bx bx-user"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
                 <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
                     <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeTarefasExpiradas">
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
                                     <h5 class="mb-4">
-                                        <?= $rowTarefasExpiradas[0] . " tarefas Expiradas" ?>
+                                        <?= $rowTarefasExpiradas[0] . " Tarefas Expiradas" ?>
                                     </h5>
                                     <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas Expiradas</p>
                                 </div>
@@ -391,7 +458,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
                                     <h5 class="mb-4">
-                                        <?= $rowTarefasRealizadas[0] . " tarefas realizadas" ?>
+                                        <?= $rowTarefasRealizadas[0] . " Tarefas realizadas" ?>
                                     </h5>
                                     <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas realizadas</p>
                                 </div>
@@ -404,13 +471,29 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                 </div>
             </div>
         </div>
-        <div class="row mb-4">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="clearfix middle shadow-sm bg-white rounded p-4">
-                    <canvas class="chart-container" style="position: relative; height:40vh; width:80vw" id="grafico"></canvas>
+        <?php
+        if (isset($_GET['inicio'])) {
+            ?>
+            <div class="row mb-4">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="clearfix middle shadow-sm bg-white rounded p-4">
+                        <canvas class="chart-container" style="position: relative; height:40vh; width:80vw" id="totalDeTarefas"></canvas>
+                    </div>
                 </div>
             </div>
-        </div>
+            <?php
+        } else {
+            ?>
+            <div class="row mb-4">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="clearfix middle shadow-sm bg-white rounded p-4">
+                        <canvas class="chart-container" style="position: relative; height:40vh; width:80vw" id="tarefasDoDia"></canvas>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
         <!--BOOTSTRAP-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
