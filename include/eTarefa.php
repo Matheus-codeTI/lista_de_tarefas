@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
 <?php
 
 include '../config/conexao.php';
@@ -35,3 +37,6 @@ if (mysqli_query($con, $excluirTarefa)) {
 } else {
     header("location: ../index.php");
 }
+?>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 

@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
 <?php
 include './config/conexao.php';
 include './config/func.php';
@@ -6,24 +8,12 @@ $hoje = date('d/m/Y');
 $dataInicio = isset($_GET['inicio']) ? databanco($_GET['inicio']) : '';
 $dataFim = isset($_GET['fim']) ? databanco($_GET['fim']) : '';
 
-$sqlTarefa = "select
-                    datager,
-                    count(*)
-            from tarefa where datafim = '" . dataBanco($hoje) . "'";
-$queryTarefaDoDia = mysqli_query($con, $sqlTarefa);
-$labelTarefas = array();
-$totalDeTarefas = array();
-while ($rowTarefa = mysqli_fetch_array($queryTarefaDoDia)) {
-    $labelTarefas[] = dataBuscaBanco($rowTarefa[0]);
-    $totalDeTarefas[] = $rowTarefa[1];
-}
-
-// USUARIOS CADASTRADOS 
-$usuariosCadastrados = "SELECT 
+// TAREFAS CADASTRADAS 
+$tarefasCadastradas = "SELECT 
                             count(*) 
                         FROM tarefa";
-$queryTarefa = mysqli_query($con, $usuariosCadastrados);
-$rowUsuarios = mysqli_fetch_array($queryTarefa);
+$queryTarefasCadastradas = mysqli_query($con, $tarefasCadastradas);
+$rowTarefas = mysqli_fetch_array($queryTarefasCadastradas);
 
 // TAREFAS EM ANDAMENTO
 $tarefasAndamento = "select 
@@ -46,7 +36,20 @@ $tarefasExpiradas = "select
 $queryTarefasExpiradas = mysqli_query($con, $tarefasExpiradas);
 $rowTarefasExpiradas = mysqli_fetch_array($queryTarefasExpiradas);
 
-// CONSULTA DO GRAFICO / BAR
+// CONSULTA DOS GRAFICOS
+// MOSTRA TODAS AS TAREFAS CADASTRAR PARA O DIA ATUAL 
+$tarefasParaOdiaAtual = "select
+                            datafim,
+                            count(*)
+                    from tarefa where datafim = '" . dataBanco($hoje) . "'";
+$queryTarefasParaHoje = mysqli_query($con, $tarefasParaOdiaAtual);
+$labelTarefas = array();
+$totalDeTarefas = array();
+while ($rowTarefa = mysqli_fetch_array($queryTarefasParaHoje)) {
+    $labelTarefas[] = dataBuscaBanco($rowTarefa[0]);
+    $totalDeTarefas[] = $rowTarefa[1];
+}
+
 // GRAFICO QUANTIDADE DE USUARIOS CADASTRADOS 
 $consultaTarefasUsuarios = "SELECT
                                 datager,
@@ -376,7 +379,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
         <div class="clearfix">
             <div class="row">
                 <?php
-                if (isset($_GET['inicio'])) {
+                if (isset($_GET['inicio']) && isset($_GET['fim'])) {
                     ?>
                     <div class="col-lg-3 col-sm-12 col-md-12 mb-2">
                         <div class="my-2 card rounded shadow-sm bg-white card-dashboard cardStyle quantidadeDeUsuariosCadastrados">
@@ -384,7 +387,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 <div class="d-flex justify-content-between px-md-1">
                                     <div>
                                         <h5 class="mb-4">
-                                            <?= $rowUsuarios[0] . " Tarefas no Total" ?>
+                                            <?= $rowTarefas[0] . " Tarefas no Total" ?>
                                         </h5>
                                         <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Total de tarefas cadastradas</p>
                                     </div>
@@ -513,3 +516,5 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
         <script src="script/javascript.js"></script>
     </body>
 </html>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 

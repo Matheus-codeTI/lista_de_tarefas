@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
 <?php
 
 include '../config/conexao.php';
@@ -46,5 +48,7 @@ if (mysqli_query($con, $atualizaTarefa)) {
     $acao = 1;
     header("location: ../index.php?acao=$acao&msg=$msg");
 }
-              
+?>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com-->            
 

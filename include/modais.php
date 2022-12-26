@@ -1,3 +1,6 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
+
 <!-- MODAL DE ATUALIZAR TAREFA--> 
 <div class="modal" id="TarefaAtualiza" role="dialog" >
     <div class="modal-dialog modal-md" role="document">
@@ -42,3 +45,7 @@
         </div>
     </div>
 </div>
+
+
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 

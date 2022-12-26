@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
 <?php
 include './config/conexao.php';
 include './config/func.php';
@@ -93,3 +95,5 @@ $rowAtualizaTarefa = mysqli_fetch_array($queryAtualizaTarefa);
 <div class="modal-footer">
     <button type="button" onclick="ExcluirTarefa('<?= $rowAtualizaTarefa[1] ?>')" class="btn btn-danger" data-bs-dismiss="modal"> Excluir tarefa <i class='bx bx-trash'></i></button>
 </div>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 

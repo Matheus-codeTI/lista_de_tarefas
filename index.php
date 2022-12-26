@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
 <?php
 session_start();
 
@@ -448,3 +450,5 @@ $hoje = date('d/m/Y');
         <script src="script/javascript.js"></script>
     </body>
 </html>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 

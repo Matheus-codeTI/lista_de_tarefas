@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
 <script>
 //    PEGA A HORA ATUAL 
     const horaAtual = new Date().toLocaleTimeString();
@@ -110,3 +112,5 @@
         </div>
     </div>
 </form>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 

@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
 <?php
 include '../config/conexao.php';
 include '../config/func.php';
@@ -44,3 +46,6 @@ include '../config/func.php';
 <div class="modal-footer">
     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> fechar <i class='bx bx-x-circle'></i></button>
 </div>
+
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo72025@gmail.com--> 
