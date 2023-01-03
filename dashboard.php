@@ -387,7 +387,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 <div class="d-flex justify-content-between px-md-1">
                                     <div>
                                         <h5 class="mb-4">
-                                            <?= $rowTarefas[0] . " Tarefas no Total" ?>
+                                            <?= $rowTarefas[0] . " Tarefas por periodo" ?>
                                         </h5>
                                         <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Total de tarefas cadastradas</p>
                                     </div>
