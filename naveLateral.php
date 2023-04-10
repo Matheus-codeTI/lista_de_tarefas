@@ -40,6 +40,10 @@
                             <i class='bx bxs-dashboard nav_icon'></i>
                             <span class="nav_name">Dashboard</span> 
                         </a>  
+                        <a style="text-decoration: none" href="cadastrarLogin.php" class="nav_link "> 
+                            <i class='bx bxs-user-circle nav_icon'></i>
+                            <span class="nav_name">Cadastrar Login</span> 
+                        </a>  
                     </div>
                 </div> 
             </nav>

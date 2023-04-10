@@ -36,6 +36,7 @@ $hoje = date('d/m/Y');
                 z-index: 99999;
                 font-size: 14px;
                 color: #5A5A5A;
+                opacity: 2s;
             }
             .botao {
                 color: #fff;
