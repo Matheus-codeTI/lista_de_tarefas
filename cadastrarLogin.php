@@ -76,9 +76,83 @@ include './config/func.php';
             *::-webkit-scrollbar{
                 width: 0;
             }
+            /* CSS DA TABELA */
+            element.style {
+                width: 539.609px;
+            }
+            .table.dataTable.table-sm>thead>tr>th {
+                padding-right: 20px;
+            }
+            .table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting {
+                padding-right: 30px;
+            }
+            .table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+                border-left-width: 0;
+            }
+            .table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
+                cursor: pointer;
+                position: relative;
+            }
+            .table.dataTable td, table.dataTable th {
+                -webkit-box-sizing: content-box;
+                box-sizing: content-box;
+            }
+            .table-bordered thead td, .table-bordered thead th {
+                border-bottom-width: 2px;
+            }
+            .table thead th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+            .table-bordered td, .table-bordered th {
+                border: 2px solid #dee2e6;
+            }
+            .table-sm td, .table-sm th {
+                padding: 0.3rem;
+            }
+            .table td, .table th {
+                padding: 0.75rem;
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+            }
+            .th {
+                text-align: inherit;
+            }
+            *, ::after, ::before {
+                box-sizing: border-box;
+            }
+            .user agent stylesheet
+            .th {
+                display: table-cell;
+                vertical-align: inherit;
+                font-weight: bold;
+                text-align: -internal-center;
+            }
+            .table.dataTable {
+                clear: both;
+                margin-top: 6px !important;
+                margin-bottom: 6px !important;
+                max-width: none !important;
+                border-collapse: separate !important;
+            }
+            .table {
+                width: 100%;
+                margin-bottom: 1rem;
+                color: #212529;
+            }
+            .table {
+                border-collapse: collapse;
+            }
+            user agent stylesheet
+            .table {
+                border-collapse: separate;
+                text-indent: initial;
+                border-spacing: 2px;
+            }
         </style>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                // DataPicker
                 $('#datepicker').datepicker({
                     format: "dd/mm/yyyy",
                     todayBtn: "linked",
@@ -89,7 +163,38 @@ include './config/func.php';
                     zIndexOffset: 99999999,
                     orientation: 'bottom'
                 });
-            });
+                // Tabela 
+                $('#table').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                    }
+                });
+
+                // verificação de confirmação de senha
+                $('#confirm_password').on('keyup', function () {
+                    var password1 = $('#password').val();
+                    var password2 = $('#confirm_password').val();
+                    if (password1 === password2) {
+                        $('#confirm_password').removeClass('is-invalid').addClass('is-valid');
+                        $('#password-feedback').html('As senhas coincidem.').removeClass('invalid-feedback').addClass('valid-feedback');
+                        $("#botao").attr("disabled", false);
+                    } else {
+                        $('#confirm_password').removeClass('is-valid').addClass('is-invalid');
+                        $('#password-feedback').html('As senhas não coincidem.').removeClass('valid-feedback').addClass('invalid-feedback');
+                        $("#botao").attr("disabled", true);
+                    }
+                });
+
+                // Quando o botão de edição for clicado
+//                $('#botao-edicao').click(function () {
+//                    // Habilita ou desabilita os campos de edição
+//                    $('#campo1, #campo2, #campo3').prop('disabled', function (i, val) {
+//                        return !val;
+//                    });
+//                });
+            }
+            );
+
             // TEMPO DE LOADER
             setTimeout(() => {
                 document.getElementById('pagina').style.display = 'none';
@@ -112,8 +217,8 @@ include './config/func.php';
             <main class="breadcrumb-item active" style="margin-top: 70px;">
                 <div class="col-lg-6">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><i style="color: green; font-size: 20px; margin-right: 08px;" class="bx bx-task mt-4"></i> </li>                            
-                        <li style="font-size: 14px;" class="mt-4">/ Lista de Tarefas </li>
+                        <li class="breadcrumb-item"><i style="color: #4723D9; font-size: 20px; margin-right: 08px;" class='bx bxs-user-circle mt-4'></i> </li>                            
+                        <li style="font-size: 14px;" class="mt-4">/ Cadastro de login </li>
                     </ul>
                 </div>
                 <?php
@@ -122,25 +227,74 @@ include './config/func.php';
                 }
                 ?>
             </main>
-            <form method="POST" action="action">
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="clearfix middle shadow-sm bg-white p-3">
-                        <h5 class="text-center">Cadastrar Login</h5>
-                        <div class="row mt-4">
-                            <div class="col-lg-6">
-                                <label class="form-label"><i class='bx bxs-user-circle'></i> Login:</label>
-                                <input class="form-control" type="text" >
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
+                    <div class="clearfix middle shadow-lg bg-white p-3">
+                        <form method="POST" action="include/glogin.php">
+                            <h5 class="text-center">Cadastrar Login <i class='bx bxs-user-rectangle'></i></h5>
+                            <div class="row mt-4">
+                                <div class="col-lg-12">
+                                    <label class="form-label"><i class='bx bxs-user-circle'></i> Login: <span style="color: red">*</span></label>
+                                    <input required autocomplete="off" class="form-control" name="login" type="text" >
+                                </div>
                             </div>
-                            <div class="col-lg-6">
-                                <label class="form-label"><i class='bx bxs-lock-alt'></i> Senha:</label>
-                                <input class="form-control" type="password" >
+                            <div class="row mt-3">  
+                                <div class="col-lg-6">
+                                    <label class="form-label mt-1"><i class='bx bxs-lock-alt'></i> Senha: <span style="color: red">*</span></label>
+                                    <input type="password" autocomplete="off" name="senha" class="form-control" placeholder="Senha" id="password" required />
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <label class="form-label mt-1"><i class='bx bxs-lock'></i> Confirmação de senha: <span style="color: red">*</span></label>
+                                    <input type="password" autocomplete="off" class="form-control" placeholder="Confirme Senha" id="confirm_password" required />
+                                    <div id="password-feedback"></div>
+                                </div>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+                            <button id="botao" type="submit" class="btn btn-primary mt-3">Cadastrar <i class='bx bx-save'></i></button>
+                        </form>
+                        <span style="color: red; font-size: 12px;">Obrigatório *</span>
                     </div>
                 </div>
-            </form>
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <div class="clearfix middle shadow-sm bg-white p-3">
+                        <h5 class="text-center">Tabela de usuários <i class='bx bxs-user-rectangle'></i></h5>
+                        <div class="table-responsive">
+                            <table id="table" class="table table-bordered table-striped table-hover dataTable js-exportable" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th scope="row">#</th>
+                                        <th scope="row">Login</th>
+                                        <th scope="row">Editar</th>
+                                        <th scope="row">Excluir</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $login = " SELECT
+                                                    idlogin,
+                                                    login,
+                                                    senha
+                                                from login";
+                                    $queryLogin = mysqli_query($con, $login);
+                                    while ($rowLogin = mysqli_fetch_array($queryLogin)) {
+                                        ?>
+                                        <tr>
+                                            <td id="campo1" scope="row"><?= $rowLogin[0] ?></td>
+                                            <td id="campo2" scope="row"><?= $rowLogin[1] ?></td>
+                                            <td class="col-1"><a style="text-decoration: none"><i style="color: #0d6efd; cursor: pointer" id="botao-edicao" class='bx bxs-edit'></i></a></td>
+                                            <td class="col-1"><a href="" style="text-decoration: none"><i style="color: red; cursor: pointer" class='bx bxs-trash'></i></a></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!--BOOTSTRAP-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

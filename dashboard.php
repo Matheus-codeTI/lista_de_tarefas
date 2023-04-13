@@ -345,7 +345,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                 <main class="breadcrumb-item active mt-3">
                     <div class="mt-5">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><i style="color: green; font-size: 20px; margin-right: 08px;" class="bx bxs-dashboard mt-4"></i> </li>                            
+                            <li class="breadcrumb-item"><i style="color: #4723D9; font-size: 20px; margin-right: 08px;" class="bx bxs-dashboard mt-4"></i> </li>                            
                             <li style="font-size: 14px;" class="mt-4">/ Dashboard </li>
                         </ul>
                         <?php

@@ -387,7 +387,7 @@ $hoje = date('d/m/Y');
             <main class="breadcrumb-item active" style="margin-top: 70px;">
                 <div class="col-lg-6">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><i style="color: green; font-size: 20px; margin-right: 08px;" class="bx bx-task mt-4"></i> </li>                            
+                        <li class="breadcrumb-item"><i style="color: #4723D9; font-size: 20px; margin-right: 08px;" class="bx bx-task mt-4"></i> </li>                            
                         <li style="font-size: 14px;" class="mt-4">/ Lista de Tarefas </li>
                     </ul>
                 </div>
