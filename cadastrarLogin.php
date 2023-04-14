@@ -169,11 +169,11 @@ include './config/func.php';
                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
                     }
                 });
-
                 // verificação de confirmação de senha
                 $('#confirm_password').on('keyup', function () {
                     var password1 = $('#password').val();
                     var password2 = $('#confirm_password').val();
+
                     if (password1 === password2) {
                         $('#confirm_password').removeClass('is-invalid').addClass('is-valid');
                         $('#password-feedback').html('As senhas coincidem.').removeClass('invalid-feedback').addClass('valid-feedback');
@@ -183,18 +183,51 @@ include './config/func.php';
                         $('#password-feedback').html('As senhas não coincidem.').removeClass('valid-feedback').addClass('invalid-feedback');
                         $("#botao").attr("disabled", true);
                     }
+                    // verifica se a senha confirmada é igual a senha
+                    $('#password').on('keyup', function () {
+                        var password1 = $('#password').val();
+                        var password2 = $('#confirm_password').val();
+
+                        if (password2 === password1) {
+                            $('#confirm_password').removeClass('is-invalid').addClass('is-valid');
+                            $('#password-feedback').html('As senhas coincidem.').removeClass('invalid-feedback').addClass('valid-feedback');
+                            $("#botao").attr("disabled", false);
+                        } else {
+                            $('#confirm_password').removeClass('is-valid').addClass('is-invalid');
+                            $('#password-feedback').html('As senhas não coincidem.').removeClass('valid-feedback').addClass('invalid-feedback');
+                            $("#botao").attr("disabled", true);
+                        }
+                    });
                 });
 
-                // Quando o botão de edição for clicado
-//                $('#botao-edicao').click(function () {
-//                    // Habilita ou desabilita os campos de edição
-//                    $('#campo1, #campo2, #campo3').prop('disabled', function (i, val) {
-//                        return !val;
-//                    });
-//                });
+                // Detecta quando o usuário sai do campo de entrada
+                $("input").blur(function () {
+                    // Verifica se o campo está vazio
+                    if ($("#confirm_password").val() === '' && $("#password").val() === '') {
+                        // Remove a classe "is-valid" do elemento
+                        $("#confirm_password").removeClass("is-valid");
+                    }
+                });
+
+                $(document).ready(function () {
+                    // Quando a célula for clicada
+                    $('td.editavel').click(function () {
+                        // Verifica se a célula está em modo de edição
+                        if ($(this).hasClass('em-edicao')) {
+                            // Salva o conteúdo da célula no banco de dados via AJAX
+                            var valor = $(this).text(); // ou $(this).html() se quiser manter as tags HTML
+                            $.post('salvar-dados.php', {valor: valor}, function () {
+                                // Finaliza a edição da célula
+                                $(this).removeClass('em-edicao').prop('contenteditable', false);
+                            });
+                        } else {
+                            // Inicia a edição da célula
+                            $(this).addClass('em-edicao').prop('contenteditable', true).focus();
+                        }
+                    });
+                });
             }
             );
-
             // TEMPO DE LOADER
             setTimeout(() => {
                 document.getElementById('pagina').style.display = 'none';
@@ -278,8 +311,8 @@ include './config/func.php';
                                     while ($rowLogin = mysqli_fetch_array($queryLogin)) {
                                         ?>
                                         <tr>
-                                            <td id="campo1" scope="row"><?= $rowLogin[0] ?></td>
-                                            <td id="campo2" scope="row"><?= $rowLogin[1] ?></td>
+                                            <td class="editavel" scope="row"><?= $rowLogin[0] ?></td>
+                                            <td class="editavel" scope="row"><?= $rowLogin[1] ?></td>
                                             <td class="col-1"><a style="text-decoration: none"><i style="color: #0d6efd; cursor: pointer" id="botao-edicao" class='bx bxs-edit'></i></a></td>
                                             <td class="col-1"><a href="" style="text-decoration: none"><i style="color: red; cursor: pointer" class='bx bxs-trash'></i></a></td>
                                         </tr>
