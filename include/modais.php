@@ -46,6 +46,35 @@
     </div>
 </div>
 
+<!--MODAL DE ATUALIZAR USUÁRIO-->
+<div class="modal" id="mUsarios" role="dialog" >
+    <div class="modal-dialog modal-md" role="document">
+        <div id="usuarios" class="modal-content">
+            <div class="modal-header">
+                <h4 class="titile text-center">
+                    Carregando...
+                    <i class="bx bx-refresh bx-spin"></i>
+                </h4>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL DE EXCLUIR USUÁRIO-->
+<div class="modal" id="mExcluiUsuario" role="dialog" >
+    <div class="modal-dialog modal-md" role="document">
+        <div id="excluiUsuario" class="modal-content">
+            <div class="modal-header">
+                <h4 class="titile text-center">
+                    Carregando...
+                    <i class="bx bx-refresh bx-spin"></i>
+                </h4>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
 
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
 <!--EMAIL : matheusaraujo72025@gmail.com--> 

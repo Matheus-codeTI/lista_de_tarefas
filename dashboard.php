@@ -358,16 +358,16 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                 <form action="dashboard.php" method="GET">
                                     <label class="form-label"><small><b>Período:</b></small></label>
                                     <span class="badge bg-secondary mb-2 float-end" style="color: white; text-transform: Capitalize; font-size: 13px" id="resposta-verificacao"></span>
-                                    <div class="input-daterange input-group flex-nowrap" id='datepicker' data-provide="datepicker">
-                                        <span class="input-group-text" id="addon-wrapping"><i class="bx bx-calendar" aria-hidden="true"></i></span>
-                                        <input id="dataInicio" value="<?= dataBuscaBanco($dataInicio) ?>" placeholder="<?= $hoje ?>" onchange="VerificaData()" name="inicio" type="text" class="input-sm data form-control" autocomplete="off">
+                                    <div class="input-daterange input-group flex-nowrap " id='datepicker' data-provide="datepicker">
+                                        <span class="input-group-text d-none d-sm-block" id="addon-wrapping"><i class="bx bx-calendar mt-1"></i></span>
+                                        <input id="dataInicio" value="<?= dataBuscaBanco($dataInicio) ?>" placeholder="__/__/____" onchange="VerificaData()" name="inicio" type="text" class="form-control" autocomplete="off">
 
                                         <small class="input-group-addon range-to mx-2 mt-2"><b> até </b></small>
 
-                                        <span class="input-group-text" id="addon-wrapping"><i class="bx bx-calendar" aria-hidden="true"></i></span>
-                                        <input id="dataFim" name="fim" value="<?= dataBuscaBanco($dataFim) ?>" placeholder="<?= $hoje ?>" onchange="VerificaData()" type="text" class="input-sm data form-control" autocomplete="off">
-                                        <button id="buscarDisabled" type="submit" style="display: none;"  disabled="disabled" class="btn btn-primary  ml-2"><i style="font-size: 19px;" class="bx bx-refresh bx-spin"></i> Carregando...</button>
-                                        <button id="buscar" type="submit" onclick="trocaBotaoBuscar()" class="btn btn-outline-primary  ml-5"><i class='bx bx-search mr-2 mb-1'></i> Buscar </button>
+                                        <span class="input-group-text d-none d-sm-block" id="addon-wrapping"><i class="bx bx-calendar mt-1"></i></span>
+                                        <input id="dataFim" name="fim" value="<?= dataBuscaBanco($dataFim) ?>" placeholder="__/__/____" onchange="VerificaData()" type="text" class="form-control " autocomplete="off">
+                                        <button id="buscarDisabled" type="submit" style="display: none;"  disabled="disabled" class="btn btn-primary ml-2"><i style="font-size: 19px;" class="bx bx-refresh bx-spin"></i> Carregando...</button>
+                                        <button id="buscar" type="submit" onclick="trocaBotaoBuscar()" class="btn btn-outline-primary ml-5"><i class='bx bx-search mr-2 mb-1'></i> Buscar </button>
                                     </div>
                                 </form>
                             </div>

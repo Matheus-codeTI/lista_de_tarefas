@@ -27,9 +27,9 @@ include './config/func.php';
             .body{
                 background-color: #f1f1f1;
                 z-index: 99999;
-                font-size: 14px;
                 color: #5A5A5A;
                 opacity: 2s;
+                font-size: 14px;
             }
             .botao {
                 color: #fff;
@@ -152,6 +152,8 @@ include './config/func.php';
         </style>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                // Select2
+                $('.select2').select2();
                 // DataPicker
                 $('#datepicker').datepicker({
                     format: "dd/mm/yyyy",
@@ -209,25 +211,48 @@ include './config/func.php';
                     }
                 });
 
-                $(document).ready(function () {
-                    // Quando a célula for clicada
-                    $('td.editavel').click(function () {
-                        // Verifica se a célula está em modo de edição
-                        if ($(this).hasClass('em-edicao')) {
-                            // Salva o conteúdo da célula no banco de dados via AJAX
-                            var valor = $(this).text(); // ou $(this).html() se quiser manter as tags HTML
-                            $.post('salvar-dados.php', {valor: valor}, function () {
-                                // Finaliza a edição da célula
-                                $(this).removeClass('em-edicao').prop('contenteditable', false);
-                            });
-                        } else {
-                            // Inicia a edição da célula
-                            $(this).addClass('em-edicao').prop('contenteditable', true).focus();
-                        }
-                    });
+
+            });
+
+            function EditaLogin(idlogin) {
+                $('#mUsarios').modal('show');
+                $.ajax({
+                    url: './mAtualizaUsuario.php',
+                    type: 'POST',
+                    data: {
+                        "idlogin": idlogin
+                    },
+                    success: function (data) {
+                        $("#usuarios").html(data);
+                        $('.select2').select2();
+                    },
+                    error: function (xhr, er, index, anchor) {
+                        console.log(xhr.status);
+                        console.log('deu RUIM');
+                    }
                 });
             }
-            );
+
+
+            function ExcluiUsuario(idlogin) {
+                $('#mExcluiUsuario').modal('show');
+                $.ajax({
+                    url: './mExcluirUsuario.php',
+                    type: 'POST',
+                    data: {
+                        "idlogin": idlogin
+                    },
+                    success: function (data) {
+                        $("#excluiUsuario").html(data);
+                    },
+                    error: function (xhr, er, index, anchor) {
+                        console.log(xhr.status);
+                        console.log('deu RUIM');
+                    }
+                });
+            }
+
+
             // TEMPO DE LOADER
             setTimeout(() => {
                 document.getElementById('pagina').style.display = 'none';
@@ -271,13 +296,13 @@ include './config/func.php';
                                     <input required autocomplete="off" class="form-control" name="login" type="text" >
                                 </div>
                             </div>
-                            <div class="row mt-3">  
+                            <div class="row mt-2">  
                                 <div class="col-lg-6">
-                                    <label class="form-label mt-1"><i class='bx bxs-lock-alt'></i> Senha: <span style="color: red">*</span></label>
+                                    <label class="form-label mt-3"><i class='bx bxs-lock-alt'></i> Senha: <span style="color: red">*</span></label>
                                     <input type="password" autocomplete="off" name="senha" class="form-control" placeholder="Senha" id="password" required />
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <label class="form-label mt-1"><i class='bx bxs-lock'></i> Confirmação de senha: <span style="color: red">*</span></label>
+                                    <label class="form-label mt-3"><i class='bx bxs-lock'></i> Confirmação de senha: <span style="color: red">*</span></label>
                                     <input type="password" autocomplete="off" class="form-control" placeholder="Confirme Senha" id="confirm_password" required />
                                     <div id="password-feedback"></div>
                                 </div>
@@ -296,6 +321,7 @@ include './config/func.php';
                                     <tr>
                                         <th scope="row">#</th>
                                         <th scope="row">Login</th>
+                                        <th scope="row">Status</th>
                                         <th scope="row">Editar</th>
                                         <th scope="row">Excluir</th>
                                     </tr>
@@ -305,16 +331,34 @@ include './config/func.php';
                                     $login = " SELECT
                                                     idlogin,
                                                     login,
-                                                    senha
+                                                    senha,
+                                                    status
                                                 from login";
                                     $queryLogin = mysqli_query($con, $login);
                                     while ($rowLogin = mysqli_fetch_array($queryLogin)) {
                                         ?>
                                         <tr>
-                                            <td class="editavel" scope="row"><?= $rowLogin[0] ?></td>
-                                            <td class="editavel" scope="row"><?= $rowLogin[1] ?></td>
-                                            <td class="col-1"><a style="text-decoration: none"><i style="color: #0d6efd; cursor: pointer" id="botao-edicao" class='bx bxs-edit'></i></a></td>
-                                            <td class="col-1"><a href="" style="text-decoration: none"><i style="color: red; cursor: pointer" class='bx bxs-trash'></i></a></td>
+                                            <td scope="row"><?= $rowLogin[0] ?></td>
+                                            <td scope="row"><?= $rowLogin[1] ?></td>
+                                            <td class="col-2">
+                                                <?php
+                                                if ($rowLogin[3] == 'a') {
+                                                    echo "<span style='text-decoration: none' class='badge badge-success'>Ativo <i class= 'bx bx-like'></i></span>";
+                                                } else {
+                                                    echo "<span style='text-decoration: none' class='badge badge-danger'>Inativo <i class='bx bx-dislike'></i></span>";
+                                                }
+                                                ?>
+                                            </td>
+                                            <td class="col-1">
+                                                <button onclick="EditaLogin('<?= $rowLogin[0] ?>')" class="btn btn-primary" >
+                                                    <i style="color: white; cursor: pointer" class='bx bxs-edit'></i>
+                                                </button>
+                                            </td>
+                                            <td class="col-1">
+                                                <button onclick="ExcluiUsuario('<?= $rowLogin[0] ?>')" class="btn btn-danger">
+                                                    <i style="cursor: pointer; color: white" class='bx bxs-trash'></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                         <?php
                                     }
@@ -326,6 +370,10 @@ include './config/func.php';
                 </div>
             </div>
         </div>
+        <!--MODAIS-->
+        <?php
+        include './include/modais.php';
+        ?>
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!--BOOTSTRAP-->
