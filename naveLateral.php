@@ -46,7 +46,9 @@
                         </a>  
                     </div>
                 </div> 
-                <a href="login.php" style="text-decoration: none" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sair</span> </a>
+                <a href="include/logout.php" style="text-decoration: none" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> 
+                    <span class="nav_name">Sair</span> 
+                </a>
             </nav>
         </div>
     </div>

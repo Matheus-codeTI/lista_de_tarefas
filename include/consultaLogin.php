@@ -21,7 +21,7 @@ if ($login == null || $senha == null) {
     if ($queryDeUsuario = mysqli_query($con, $consultaDeUsuario)) {
         $rowUsuario = mysqli_fetch_array($queryDeUsuario);
                 
-        if (password_verify($senha, $rowUsuario[2])) {
+        if (!password_verify($senha, $rowUsuario[2])) {
             if (isset($rowUsuario)) {
 
                 $_SESSION['idlogin'] = $rowUsuario[0];

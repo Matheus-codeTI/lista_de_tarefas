@@ -26,39 +26,38 @@ include './config/func.php';
     <script>
         setTimeout(function () {
             document.getElementById('msg').style.display = 'none';
-        }, 3000); // Esconde a mensagem depois de 3 segundos
+        }, 4000); // Esconde a mensagem depois de 4 segundos
     </script>
-</script>
-<body>
-    <form method="POST" action="include/consultaLogin.php">
-        <div class="container">
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="col-lg-4 col-md-10 col-sm-12">
-                    <div class="clearfix middle shadow-lg bg-white p-4">
-                        <div class="text-center">
-                            <?php
-                            if (!empty($_GET["msg"])) {
-                                $msg = $_GET["msg"];
-                                echo "<br><h6 id='msg' style='color: red;'>" . $msg . "<br> </h6>";
-                            }
-                            ?>
-                            <h4>Acesso ao sistema</h4>
+    <body>
+        <form method="POST" action="include/consultaLogin.php">
+            <div class="container">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="col-lg-4 col-md-10 col-sm-12">
+                        <div class="clearfix middle shadow-lg bg-white p-4">
+                            <div class="text-center">
+                                <?php
+                                if (!empty($_GET["msg"])) {
+                                    $msg = $_GET["msg"];
+                                    echo "<br><h6 id='msg' style='color: red;'>" . $msg . "<br> </h6>";
+                                }
+                                ?>
+                                <h4>Acesso ao sistema</h4>
+                            </div>
+                            <small><label class="form-label">Login:</label></small>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class='bx bxs-user-circle'></i></span>
+                                <input type="text" name="login" class="form-control" required="">
+                            </div>
+                            <small><label class="form-label">Senha:</label></small>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class='bx bxs-lock-alt'></i></span>
+                                <input type="password" name="senha" class="form-control" required="">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Acessar</button>
                         </div>
-                        <small><label class="form-label">Login:</label></small>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"><i class='bx bxs-user-circle'></i></span>
-                            <input type="text" name="login" class="form-control" required="">
-                        </div>
-                        <small><label class="form-label">Senha:</label></small>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"><i class='bx bxs-lock-alt'></i></span>
-                            <input type="text" name="senha" class="form-control" required="">
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Acessar</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-</body>
+        </form>
+    </body>
 </html>
