@@ -30,22 +30,22 @@ if ($inicio > $fim) {
 
     $acao = 1;
     $msg = "A data de início não pode ser maior que a data final, por favor cadastre outra data";
-    header("location: ../index.php?msg=$msg&acao=$acao");
+    header("location: ../listaDeTarefas.php?msg=$msg&acao=$acao");
 } elseif ($fim < $agora) {
 
     $acao = 1;
     $msg = "A hora final não pode ser menor que a hora atual";
-    header("location: ../index.php?msg=$msg&acao=$acao");
+    header("location: ../listaDeTarefas.php?msg=$msg&acao=$acao");
 } elseif ($fim < $inicio) {
 
     $acao = 1;
     $msg = "A data final não pode ser menor que a data inicio, por favor cadastre outra data";
-    header("location: ../index.php?msg=$msg&acao=$acao");
+    header("location: ../listaDeTarefas.php?msg=$msg&acao=$acao");
 } else {
     if ($horaInicio > $horaFim) {
         $acao = 1;
         $msg = "Hora inicio é menor que a hora atual, por favor cadastre outro horário !";
-        header("location: ../index.php?msg=$msg&acao=$acao");
+        header("location: ../listaDeTarefas.php?msg=$msg&acao=$acao");
     } else {
         $insertTarefa = "INSERT INTO tarefa values(null,
                                     '$idTipotarefa',
@@ -66,11 +66,11 @@ if ($inicio > $fim) {
 
             $acao = 0;
             $msg = "Tarefa cadastrada com sucesso !";
-            header("location: ../index.php?msg=$msg&acao=$acao");
+            header("location: ../listaDeTarefas.php?msg=$msg&acao=$acao");
         } else {
             $acao = 1;
             $msg = "Erro ao cadastrar tarefa";
-            header("location: ../index.php?msg=$msg&acao=$acao");
+            header("location: ../listaDeTarefas.php?msg=$msg&acao=$acao");
         }
     }
 }

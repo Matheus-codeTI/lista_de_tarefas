@@ -14,9 +14,9 @@ if ($status == 'p') {
     $update = "update tarefa set status = 'r' where idtarefa = {$idtarefa}";
 }
 if (mysqli_query($con, $update)) {
-    header("location: ../index.php");
+    header("location: ../listaDeTarefas.php");
 } else {
-    header("location: ../index.php");
+    header("location: ../listaDeTarefas.php");
 }
 ?>
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 

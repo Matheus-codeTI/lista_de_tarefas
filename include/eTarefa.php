@@ -33,9 +33,9 @@ if (mysqli_query($con, $excluirTarefa)) {
                                                 '$horaAtual')";
     mysqli_query($con, $logTarefa);
 
-    header("location: ../index.php");
+    header("location: ../listaDeTarefas.php");
 } else {
-    header("location: ../index.php");
+    header("location: ../listaDeTarefas.php");
 }
 ?>
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
