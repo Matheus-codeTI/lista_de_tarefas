@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include '../config/conexao.php';
 include '../config/func.php';
@@ -15,14 +16,14 @@ if ($login == null || $senha == null) {
                             login,
                             senha,
                             status
-                    from login where login = '$login'
-                    and senha = '$senha' and status = 'a'";
-    
-    if ($queryDeUsuario = mysqli_query($con, $consultaDeUsuario)) {
+                    from login where login = '$login'";
+
+    $queryDeUsuario = mysqli_query($con, $consultaDeUsuario);
+    if (mysqli_num_rows($queryDeUsuario) > 0) {
+
         $rowUsuario = mysqli_fetch_array($queryDeUsuario);
-                
-        if (!password_verify($senha, $rowUsuario[2])) {
-            if (isset($rowUsuario)) {
+        if ($rowUsuario[2] == $senha) {
+            if ($rowUsuario[3] == 'a') {
 
                 $_SESSION['idlogin'] = $rowUsuario[0];
                 $_SESSION['login'] = $rowUsuario[1];
@@ -38,7 +39,7 @@ if ($login == null || $senha == null) {
             header("location: ../login.php?msg=" . $msg);
         }
     } else {
-        $msg = "<i class='bx bx-frown-o' aria-hidden='true'></i> <br> Erro ao procurar usuário!";
+        $msg = "<i class='bx bx-frown-o' aria-hidden='true'></i> <br> Esse usuário não existe em nosso sistema!";
         header("location: ../login.php?msg=" . $msg);
     }
 }

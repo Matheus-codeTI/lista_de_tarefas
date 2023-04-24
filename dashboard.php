@@ -1,6 +1,7 @@
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
 <!--EMAIL : matheusaraujo72025@gmail.com--> 
 <?php
+session_start();
 include './config/conexao.php';
 include './config/func.php';
 
