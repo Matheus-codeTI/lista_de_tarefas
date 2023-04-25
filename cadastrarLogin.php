@@ -2,6 +2,8 @@
 session_start();
 include './config/conexao.php';
 include './config/func.php';
+include './include/seguranca.php';
+
 ?>
 <html>
     <head>

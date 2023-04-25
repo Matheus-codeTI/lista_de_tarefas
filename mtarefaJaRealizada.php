@@ -3,6 +3,7 @@
 <?php
 include './config/conexao.php';
 include './config/func.php';
+include './include/seguranca.php';
 
 $id = $_POST['idtarefa'];
 

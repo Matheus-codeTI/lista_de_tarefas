@@ -4,6 +4,7 @@
 session_start();
 include './config/conexao.php';
 include './config/func.php';
+include './include/seguranca.php';
 
 $hoje = date('d/m/Y');
 $dataInicio = isset($_GET['inicio']) ? databanco($_GET['inicio']) : '';
