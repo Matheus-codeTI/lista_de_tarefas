@@ -34,7 +34,7 @@
                         <span class="nav_logo-name">Lista de Tarefas</span>
                     </a>
                     <div class="nav_list">
-                        <a style="text-decoration: none" href="index.php" class="nav_link "> 
+                        <a style="text-decoration: none" href="listaDeTarefas.php" class="nav_link "> 
                             <i class='bx bx-calendar-check nav_icon'></i> 
                             <span class="nav_name">Cadastrar Tarefa</span>
                         </a>

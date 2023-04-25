@@ -42,11 +42,11 @@ if (mysqli_query($con, $atualizaTarefa)) {
 
     $msg = "Tarefa Atualizada com sucesso !";
     $acao = 0;
-    header("location: ../index.php?acao=$acao&msg=$msg");
+    header("location: ../listaDeTarefas.php?acao=$acao&msg=$msg");
 } else {
     $msg = "Erro ao atualizar tarefa";
     $acao = 1;
-    header("location: ../index.php?acao=$acao&msg=$msg");
+    header("location: ../listaDeTarefas.php?acao=$acao&msg=$msg");
 }
 ?>
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
