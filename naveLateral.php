@@ -13,13 +13,13 @@
                     $hr = date('H:i:s', time());
 
                     if ($hr >= 0 && $hr < 6) {
-                        $resp = "<em>Olá <b>". $_SESSION['login']."</b>, boa madrugada! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                        $resp = "<em>Olá <b>". $_SESSION['login']."</b>, boa madrugada! Bem vindo(a) à sua <b>lista de tarefa!</b></em>";
                     } elseif ($hr >= 12 && $hr < 18) {
-                        $resp = "<em>Olá <b>". $_SESSION['login']."</b>, boa tarde! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                        $resp = "<em>Olá <b>". $_SESSION['login']."</b>, boa tarde! Bem vindo(a) à sua <b>lista de tarefa!</b></em>";
                     } elseif ($hr >= 0 && $hr < 12) {
-                        $resp = "<em>Olá <b>". $_SESSION['login']."</b>, bom dia! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                        $resp = "<em>Olá <b>". $_SESSION['login']."</b>, bom dia! Bem vindo(a) à sua <b>lista de tarefa!</b></em>";
                     } else {
-                        $resp = "<em>Olá <b>". $_SESSION['login']."</b>, boa noite! Bem vindo(a) a sua <b>lista de tarefa!</b></em>";
+                        $resp = "<em>Olá <b>". $_SESSION['login']."</b>, boa noite! Bem vindo(a) à sua <b>lista de tarefa!</b></em>";
                     }
                     echo "$resp";
                     ?>

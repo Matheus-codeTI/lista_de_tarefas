@@ -32,7 +32,7 @@ include './config/func.php';
         <form method="POST" action="include/consultaLogin.php">
             <div class="container">
                 <div class="d-flex justify-content-center align-items-center">
-                    <div class="col-lg-4 col-md-10 col-sm-12">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="clearfix middle shadow-lg bg-white p-4">
                             <div class="text-center">
                                 <?php
