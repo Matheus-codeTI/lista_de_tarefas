@@ -234,7 +234,9 @@ $hoje = date('d/m/Y');
                             },
                             "destroy": true,
                             "retrieve": true,
-                            "stateSave": true
+                            "stateSave": true,
+                            "order": [[0, "asc"]]
+                            
                         });
                     },
                     error: function (xhr, er, index, anchor) {

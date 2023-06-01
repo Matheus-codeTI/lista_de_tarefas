@@ -64,70 +64,60 @@ while ($rowTarefa = mysqli_fetch_array($queryTarefa)) {
         <!-- REALIZAR TAREFA-->
         <td>
             <?php
-            if ($rowTarefa[7] == 'r') {
-                ?>
-                <button onclick="tarefaConcluida()" class="badge badge-success">Concluída <i style="font-size: 17px;" class='bx bx-check-circle'></i></button>
-                <?php
-            } else {
-                if ($dataAtual >= $dataFinal && $horaAtual > $horaFinal) {
+            switch ($rowTarefa[7]) {
+                case 'r':
+                    ?>
+                    <button onclick="tarefaConcluida()" class="badge badge-success">Concluída <i style="font-size: 17px;" class='bx bx-check-circle'></i></button>
+                    <?php
+                    break;
+                case ($dataAtual >= $dataFinal && $horaAtual > $horaFinal):
                     ?>
                     <button onclick="tarefaExpirada()" class="badge badge-warning">Tarefa expirada <i style="font-size: 17px;" class='bx bx-info-circle'></i></button>
                     <?php
-                } else {
-
-                    if ($rowTarefa[7] == 'p') {
-                        ?>
-                        <button onclick="IniciarTarefa('<?= $rowTarefa[0] ?>', '<?= $rowTarefa[7] ?>')" class="badge badge-info">Iniciar Tarefa <i style="font-size: 17px;" class='bx bx-play-circle' ></i></button>
-                        <?php
-                    } elseif ($rowTarefa[7] == 'a') {
-                        ?>
-                        <button onclick="RealizarTarefa('<?= $rowTarefa[0] ?>', '<?= $rowTarefa[7] ?>')" class="badge badge-success">Realizar Tarefa <i style="font-size: 17px;" class='bx bx-calendar-check' ></i></button>
-                        <?php
-                    } elseif ($rowTarefa[7] == 'r') {
-                        ?>
-                        <button onclick="tarefaConcluida()" class="badge badge-success">Concluída <i style="font-size: 17px;" class='bx bx-check-circle'></i></button>
-                        <?php
-                    } elseif ($rowTarefa[7] == 'e') {
-                        ?>
-                        <button onclick="tarefaExpirada()" class="badge badge-warning">Tarefa expirada <i style="font-size: 17px;" class='bx bx-info-circle'></i></button>
-                        <?php
-                    }
-                }
+                    break;
+                case 'p':
+                    ?>
+                    <button onclick="IniciarTarefa('<?= $rowTarefa[0] ?>', '<?= $rowTarefa[7] ?>')" class="badge badge-info">Iniciar Tarefa <i style="font-size: 17px;" class='bx bx-play-circle' ></i></button>
+                    <?php
+                    break;
+                case 'a':
+                    ?>
+                    <button onclick="RealizarTarefa('<?= $rowTarefa[0] ?>', '<?= $rowTarefa[7] ?>')" class="badge badge-success">Realizar Tarefa <i style="font-size: 17px;" class='bx bx-calendar-check' ></i></button>
+                    <?php
+                    break;
+                case 'e':
+                    ?>
+                    <button onclick="tarefaExpirada()" class="badge badge-warning">Tarefa expirada <i style="font-size: 17px;" class='bx bx-info-circle'></i></button>
+                    <?php
+                    break;
             }
             ?>
         </td>
         <!-- CAMPO EDITAR--> 
         <td>
             <?php
-            if ($rowTarefa[7] == 'r') {
-                ?>
-                <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada"  class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
-                <?php
-            } else {
-                if ($dataAtual >= $dataFinal && $horaAtual > $horaFinal) {
+            switch ($rowTarefa[7]) {
+                case 'r':
                     ?>
-                    <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada"  class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
+                    <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada" class="btn btn-primary"><i class='bx bxs-edit'></i></button>
                     <?php
-                } else {
-
-                    if ($rowTarefa[7] == 'a') {
-                        ?>
-                        <button onclick="atualizaTarefa('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#Atualizatarefa" class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
+                    break;
+                case ($dataAtual >= $dataFinal && $horaAtual > $horaFinal):
+                    ?>
+                    <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada" class="btn btn-primary"><i class='bx bxs-edit'></i></button>
+                    <?php
+                    break;
+                case 'a':
+                case 'p':
+                    ?>
+                    <button onclick="atualizaTarefa('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#Atualizatarefa" class="btn btn-primary"><i class='bx bxs-edit'></i></button>
+                    <?php
+                    break;
+                case 'e':
+                    ?>
+                    <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada" class="btn btn-primary"><i class='bx bxs-edit'></i></button>
                         <?php
-                    } elseif ($rowTarefa[7] == 'p') {
-                        ?>
-                        <button onclick="atualizaTarefa('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#Atualizatarefa" class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
-                        <?php
-                    } elseif ($rowTarefa[7] == 'r') {
-                        ?>
-                        <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada"  class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
-                        <?php
-                    } elseif ($rowTarefa[7] == 'e') {
-                        ?>
-                        <button onclick="EditaTarefaJaRealizada('<?= $rowTarefa[0] ?>')" data-bs-toggle="modal" data-bs-target="#tarefaJaRealizada"  class="btn btn-primary" ><i class='bx bxs-edit'></i></button>
-                            <?php
-                        }
-                    }
+                        break;
                 }
                 ?>
         </td>
