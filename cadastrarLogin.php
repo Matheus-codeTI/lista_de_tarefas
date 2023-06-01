@@ -305,7 +305,7 @@ include './include/seguranca.php';
                                     <input type="password" autocomplete="off" name="senha" class="form-control" placeholder="Senha" id="password" required />
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <label class="form-label mt-3"><i class='bx bxs-lock'></i> Confirmação de senha: <span style="color: red">*</span></label>
+                                    <label class="form-label mt-3"><i class='bx bxs-lock'></i> Confirme a senha: <span style="color: red">*</span></label>
                                     <input type="password" autocomplete="off" class="form-control" placeholder="Confirme Senha" id="confirm_password" required />
                                     <div id="password-feedback"></div>
                                 </div>
