@@ -22,8 +22,8 @@
                 <div class="col-lg-5 col-md-10 col-sm-12">
                     <div class="clearfix middle shadow-lg bg-white p-4">
                         <div class="text-center">
-                            <h3 class="mb-5">Você não tem acesso a esse sistema !!</h3>
-                            <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_py5j9rou.json"  background="transparent" speed="1" style=" height: 300px;" loop autoplay></lottie-player>
+                            <h3 class="mb-5">Você não tem acesso a esse sistema</h3>
+                            <lottie-player src="https://assets4.lottiefiles.com/private_files/lf30_8wacjhqf.json"  background="transparent"  speed="1"  style="height: 300px;"  loop autoplay></lottie-player>
                         </div>
                     </div>
                 </div>
