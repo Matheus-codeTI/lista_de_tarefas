@@ -3,7 +3,6 @@ session_start();
 include './config/conexao.php';
 include './config/func.php';
 include './include/seguranca.php';
-
 ?>
 <html>
     <head>
@@ -274,101 +273,99 @@ include './include/seguranca.php';
             </div>
             <div class="text">Carregando...</div>
         </div>
+        <main class="breadcrumb-item active" style="margin-top: 70px;">
+            <div class="col-lg-6">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><i style="color: #4723D9; font-size: 20px; margin-right: 08px;" class='bx bxs-user-circle mt-4'></i> </li>                            
+                    <li style="font-size: 14px;" class="mt-4">/ Cadastro de login </li>
+                </ul>
+            </div>
+            <?php
+            if (isset($_GET['acao']) && $_GET['msg']) {
+                echo montaAlert($_GET['acao'], $_GET['msg']);
+            }
+            ?>
+        </main>
         <div class="row">
-            <main class="breadcrumb-item active" style="margin-top: 70px;">
-                <div class="col-lg-6">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><i style="color: #4723D9; font-size: 20px; margin-right: 08px;" class='bx bxs-user-circle mt-4'></i> </li>                            
-                        <li style="font-size: 14px;" class="mt-4">/ Cadastro de login </li>
-                    </ul>
-                </div>
-                <?php
-                if (isset($_GET['acao']) && $_GET['msg']) {
-                    echo montaAlert($_GET['acao'], $_GET['msg']);
-                }
-                ?>
-            </main>
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
-                    <div class="clearfix middle shadow-lg bg-white p-3">
-                        <form method="POST" action="include/glogin.php">
-                            <h5 class="text-center">Cadastrar Login <i class='bx bxs-user-rectangle'></i></h5>
-                            <div class="row mt-4">
-                                <div class="col-lg-12">
-                                    <label class="form-label"><i class='bx bxs-user-circle'></i> Login: <span style="color: red">*</span></label>
-                                    <input required autocomplete="off" class="form-control" name="login" type="text" >
-                                </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
+                <div class="clearfix middle shadow-lg bg-white p-3">
+                    <form method="POST" action="include/glogin.php">
+                        <h5 class="text-center">Cadastrar Login <i class='bx bxs-user-rectangle'></i></h5>
+                        <div class="row mt-4">
+                            <div class="col-lg-12">
+                                <label class="form-label"><i class='bx bxs-user-circle'></i> Login: <span style="color: red">*</span></label>
+                                <input required autocomplete="off" class="form-control" name="login" type="text" >
                             </div>
-                            <div class="row mt-2">  
-                                <div class="col-lg-6">
-                                    <label class="form-label mt-3"><i class='bx bxs-lock-alt'></i> Senha: <span style="color: red">*</span></label>
-                                    <input type="password" autocomplete="off" name="senha" class="form-control" placeholder="Senha" id="password" required />
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <label class="form-label mt-3"><i class='bx bxs-lock'></i> Confirme a senha: <span style="color: red">*</span></label>
-                                    <input type="password" autocomplete="off" class="form-control" placeholder="Confirme Senha" id="confirm_password" required />
-                                    <div id="password-feedback"></div>
-                                </div>
+                        </div>
+                        <div class="row mt-2">  
+                            <div class="col-lg-6">
+                                <label class="form-label mt-3"><i class='bx bxs-lock-alt'></i> Senha: <span style="color: red">*</span></label>
+                                <input type="password" autocomplete="off" name="senha" class="form-control" placeholder="Senha" id="password" required />
                             </div>
-                            <button id="botao" type="submit" class="btn btn-primary mt-3">Cadastrar <i class='bx bx-save'></i></button>
-                        </form>
-                        <span style="color: red; font-size: 12px;">Obrigatório *</span>
-                    </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <label class="form-label mt-3"><i class='bx bxs-lock'></i> Confirme a senha: <span style="color: red">*</span></label>
+                                <input type="password" autocomplete="off" class="form-control" placeholder="Confirme Senha" id="confirm_password" required />
+                                <div id="password-feedback"></div>
+                            </div>
+                        </div>
+                        <button id="botao" type="submit" class="btn btn-primary mt-3">Cadastrar <i class='bx bx-save'></i></button>
+                    </form>
+                    <span style="color: red; font-size: 12px;">Obrigatório *</span>
                 </div>
-                <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div class="clearfix middle shadow-sm bg-white p-3">
-                        <h5 class="text-center">Tabela de usuários <i class='bx bxs-user-rectangle'></i></h5>
-                        <div class="table-responsive">
-                            <table id="table" class="table table-bordered table-striped table-hover dataTable js-exportable" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th scope="row">#</th>
-                                        <th scope="row">Login</th>
-                                        <th scope="row">Status</th>
-                                        <th scope="row">Editar</th>
-                                        <th scope="row">Excluir</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $login = " SELECT
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="clearfix middle shadow-sm bg-white p-3">
+                    <h5 class="text-center">Tabela de usuários <i class='bx bxs-user-rectangle'></i></h5>
+                    <div class="table-responsive">
+                        <table id="table" class="table table-bordered table-striped table-hover dataTable js-exportable" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="row">#</th>
+                                    <th scope="row">Login</th>
+                                    <th scope="row">Status</th>
+                                    <th scope="row">Editar</th>
+                                    <th scope="row">Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $login = " SELECT
                                                     idlogin,
                                                     login,
                                                     senha,
                                                     status
                                                 from login";
-                                    $queryLogin = mysqli_query($con, $login);
-                                    while ($rowLogin = mysqli_fetch_array($queryLogin)) {
-                                        ?>
-                                        <tr>
-                                            <td scope="row"><?= $rowLogin[0] ?></td>
-                                            <td scope="row"><?= $rowLogin[1] ?></td>
-                                            <td class="col-2">
-                                                <?php
-                                                if ($rowLogin[3] == 'a') {
-                                                    echo "<span style='text-decoration: none' class='badge badge-success'>Ativo <i class= 'bx bx-like'></i></span>";
-                                                } else {
-                                                    echo "<span style='text-decoration: none' class='badge badge-danger'>Inativo <i class='bx bx-dislike'></i></span>";
-                                                }
-                                                ?>
-                                            </td>
-                                            <td class="col-1">
-                                                <button onclick="EditaLogin('<?= $rowLogin[0] ?>')" class="btn btn-primary" >
-                                                    <i style="color: white; cursor: pointer" class='bx bxs-edit'></i>
-                                                </button>
-                                            </td>
-                                            <td class="col-1">
-                                                <button onclick="ExcluiUsuario('<?= $rowLogin[0] ?>')" class="btn btn-danger">
-                                                    <i style="cursor: pointer; color: white" class='bx bxs-trash'></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                    }
+                                $queryLogin = mysqli_query($con, $login);
+                                while ($rowLogin = mysqli_fetch_array($queryLogin)) {
                                     ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <tr>
+                                        <td scope="row"><?= $rowLogin[0] ?></td>
+                                        <td scope="row"><?= $rowLogin[1] ?></td>
+                                        <td class="col-2">
+                                            <?php
+                                            if ($rowLogin[3] == 'a') {
+                                                echo "<span style='text-decoration: none' class='badge badge-success'>Ativo <i class= 'bx bx-like'></i></span>";
+                                            } else {
+                                                echo "<span style='text-decoration: none' class='badge badge-danger'>Inativo <i class='bx bx-dislike'></i></span>";
+                                            }
+                                            ?>
+                                        </td>
+                                        <td class="col-1">
+                                            <button onclick="EditaLogin('<?= $rowLogin[0] ?>')" class="btn btn-primary" >
+                                                <i style="color: white; cursor: pointer" class='bx bxs-edit'></i>
+                                            </button>
+                                        </td>
+                                        <td class="col-1">
+                                            <button onclick="ExcluiUsuario('<?= $rowLogin[0] ?>')" class="btn btn-danger">
+                                                <i style="cursor: pointer; color: white" class='bx bxs-trash'></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -392,7 +392,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                         <h6 class="mb-4">
                                             <?= $rowTarefas[0] . " Tarefas por periodo" ?>
                                         </h6>
-                                        <p style="font-size: 1.0rem;" class="mb-0 cardTextColor"> Total por período</p>
+                                        <p style="font-size: 0.9rem;" class="mb-0 cardTextColor">Total por período</p>
                                     </div>
                                     <div class="align-self-center">
                                         <i style="font-size: 4rem;" class="bx bx-user"></i>
@@ -412,7 +412,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                         <h6 class="mb-4">
                                             <?= $totalDeTarefas[0] . " Tarefas para Hoje" ?>
                                         </h6>
-                                        <p style="font-size: 1.0rem;" class="mb-0 cardTextColor"> Tarefas para hoje </p>
+                                        <p style="font-size: 0.9rem;" class="mb-0 cardTextColor">Tarefas para hoje </p>
                                     </div>
                                     <div class="align-self-center">
                                         <i style="font-size: 4rem;" class="bx bx-user"></i>
@@ -432,7 +432,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                     <h6 class="mb-4">
                                         <?= $rowTarefasExpiradas[0] . " Tarefas Expiradas" ?>
                                     </h6>
-                                    <p style="font-size: 1.0rem;" class="mb-0 cardTextColor"> Tarefas Expiradas</p>
+                                    <p style="font-size: 0.9rem;" class="mb-0 cardTextColor">Tarefas Expiradas</p>
                                 </div>
                                 <div class="align-self-center">
                                     <i style="font-size: 4rem;" class='bx bx-time'></i>
@@ -449,7 +449,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                     <h6 class="mb-4">
                                         <?= $rowTarefasAndamento[0] . " Tarefas Em andamento" ?>
                                     </h6>
-                                    <p style="font-size: 1.0rem;" class="mb-0 cardTextColor"> Tarefas em andamento</p>
+                                    <p style="font-size: 0.9rem;" class="mb-0 cardTextColor">Tarefas em andamento</p>
                                 </div>
                                 <div class="align-self-center">
                                     <i style="font-size: 4rem;" class="bx bx-cog bx-spin"></i>
@@ -466,7 +466,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                     <h6 class="mb-4">
                                         <?= $rowTarefasRealizadas[0] . " Tarefas realizadas" ?>
                                     </h6>
-                                    <p style="font-size: 1.1rem;" class="mb-0 cardTextColor"> Tarefas realizadas</p>
+                                    <p style="font-size: 0.9rem;" class="mb-0 cardTextColor">Tarefas realizadas</p>
                                 </div>
                                 <div class="align-self-center">
                                     <i style="font-size: 4rem;" class="bx bxs-calendar-check"></i>
