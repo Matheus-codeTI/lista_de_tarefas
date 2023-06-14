@@ -273,20 +273,20 @@ include './include/seguranca.php';
             </div>
             <div class="text">Carregando...</div>
         </div>
-        <main class="breadcrumb-item active" style="margin-top: 70px;">
-            <div class="col-lg-6">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><i style="color: #4723D9; font-size: 20px; margin-right: 08px;" class='bx bxs-user-circle mt-4'></i> </li>                            
-                    <li style="font-size: 14px;" class="mt-4">/ Cadastro de login </li>
-                </ul>
-            </div>
-            <?php
-            if (isset($_GET['acao']) && $_GET['msg']) {
-                echo montaAlert($_GET['acao'], $_GET['msg']);
-            }
-            ?>
-        </main>
         <div class="row">
+            <main class="breadcrumb-item active" style="margin-top: 70px;">
+                <div class="col-lg-6">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><i style="color: #4723D9; font-size: 20px; margin-right: 08px;" class='bx bxs-user-circle mt-4'></i> </li>                            
+                        <li style="font-size: 14px;" class="mt-4">/ Cadastro de login </li>
+                    </ul>
+                </div>
+                <?php
+                if (isset($_GET['acao']) && $_GET['msg']) {
+                    echo montaAlert($_GET['acao'], $_GET['msg']);
+                }
+                ?>
+            </main>
             <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
                 <div class="clearfix middle shadow-lg bg-white p-3">
                     <form method="POST" action="include/glogin.php">
