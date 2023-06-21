@@ -370,7 +370,7 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
                                         <input id="dataFim" name="fim" value="<?= dataBuscaBanco($dataFim) ?>" placeholder="__/__/____" onchange="VerificaData()" type="text" class="form-control " autocomplete="off">
                                         <button id="buscarDisabled" type="submit" style="display: none;"  disabled="disabled" class="btn btn-primary ml-2"><i style="font-size: 19px;" class="bx bx-refresh bx-spin"></i> Carregando...</button>
                                         <button id="buscar" type="submit" onclick="trocaBotaoBuscar()" class="btn btn-outline-primary ml-5"><i class='bx bx-search mr-2 mb-1'></i> Buscar </button>
-                                        <a class="btn btn-outline-secondary" style="margin-left: 10px;" href="dashboard.php"><i class='bx bxs-eraser'></i> Limpar filtro</a>
+                                        <a class="btn btn-outline-secondary btn-sm" style="margin-left: 10px;" href="dashboard.php"><i class='bx bxs-eraser mt-2'></i> Limpar filtro</a>
                                     </div>
                                 </form>
                             </div>

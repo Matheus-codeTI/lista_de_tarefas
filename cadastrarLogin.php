@@ -330,11 +330,11 @@ include './include/seguranca.php';
                             <tbody>
                                 <?php
                                 $login = " SELECT
-                                                    idlogin,
-                                                    login,
-                                                    senha,
-                                                    status
-                                                from login";
+                                                idlogin,
+                                                login,
+                                                senha,
+                                                status
+                                            from login";
                                 $queryLogin = mysqli_query($con, $login);
                                 while ($rowLogin = mysqli_fetch_array($queryLogin)) {
                                     ?>

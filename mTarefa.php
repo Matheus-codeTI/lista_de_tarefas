@@ -1,29 +1,6 @@
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
 <!--EMAIL : matheusaraujo72025@gmail.com--> 
-<script>
-//    PEGA A HORA ATUAL 
-    const horaAtual = new Date().toLocaleTimeString();
 
-//    VERIFICA SE A HORA FINAL É MENOR QUE A HORA ATUAL
-    function VerificaHoraFinal() {
-        let Msg = 'Hora final é menor que a hora inicio, por favor selecione outro horário';
-        let button = $("#CadastrarTarefa");
-        let horaFim = $("#HoraFinal").val().split('/');
-        let horaInicio = $("#HoraInicio").val().split('/');
-
-
-        if (horaFim <= horaInicio) {
-            button.attr('disabled', 'disabled');
-            $("#resposta-verificacao").html(Msg);
-            $("#resposta-verificacao").show();
-        } else {
-
-            button.removeAttr('disabled');
-            $("#resposta-verificacao").hide();
-            $("#resposta-verificacao-segunda-mensagem").hide();
-        }
-    }
-</script>
 <!-- Modal -->
 <form action="include/gtarefa.php" method="POST">
     <div class="modal" id="tarefa" >
@@ -98,8 +75,6 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 col-md-12">
-                            <span class="badge bg-secondary mb-2 my-2 float-end" style="color: white; text-transform: Capitalize; font-size: 12.5px;" id="resposta-verificacao"></span>
-                            <span class="badge bg-secondary mb-2 my-2 float-end" style="color: white; text-transform: Capitalize; font-size: 12.5px;" id="resposta-verificacao-segunda-mensagem"></span>
                             <p style="color: red; font-size: 12px;" class="my-2"> Obrigatório *</p>
                         </div>
                     </div>
