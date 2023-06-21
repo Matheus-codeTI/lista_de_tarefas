@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 
 <?php
 include './config/conexao.php';
 include './config/func.php';
@@ -61,3 +63,5 @@ include './config/func.php';
         </form>
     </body>
 </html>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 

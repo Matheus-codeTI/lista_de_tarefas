@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 
 <?php
 session_start();
 include './config/conexao.php';
@@ -395,3 +397,5 @@ include './include/seguranca.php';
         <script src="script/javascript.js"></script>
     </body>
 </html>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 

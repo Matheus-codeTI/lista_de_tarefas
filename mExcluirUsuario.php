@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 
 <?php
 include './config/conexao.php';
 include './config/func.php';
@@ -30,3 +32,5 @@ $rowUsuarioBuscado = mysqli_fetch_array($queryBuscaUsuario);
         </a>
     </div>
 </div>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 

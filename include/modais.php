@@ -1,5 +1,5 @@
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
-<!--EMAIL : matheusaraujo72025@gmail.com--> 
+<!--EMAIL : matheusaraujo7562@gmail.com-->  
 
 <!-- MODAL DE ATUALIZAR TAREFA--> 
 <div class="modal" id="TarefaAtualiza" role="dialog" >
@@ -77,4 +77,4 @@
 </div>
 
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
-<!--EMAIL : matheusaraujo72025@gmail.com--> 
+<!--EMAIL : matheusaraujo7562@gmail.com-->  

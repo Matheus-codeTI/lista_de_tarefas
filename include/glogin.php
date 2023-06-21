@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 
 <?php
 
 include '../config/conexao.php';

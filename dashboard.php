@@ -1,5 +1,5 @@
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
-<!--EMAIL : matheusaraujo72025@gmail.com--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 
 <?php
 session_start();
 include './config/conexao.php';
@@ -520,4 +520,4 @@ while ($rowGraficoTarefasRealizadas = mysqli_fetch_array($queryTafRealizadas)) {
     </body>
 </html>
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
-<!--EMAIL : matheusaraujo72025@gmail.com--> 
+<!--EMAIL : matheusaraujo7562@gmail.com-->  

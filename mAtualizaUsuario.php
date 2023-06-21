@@ -1,3 +1,5 @@
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 
 <?php
 include './config/conexao.php';
 include './config/func.php';
@@ -40,3 +42,5 @@ $rowUsuarios = mysqli_fetch_array($queryUsuarios);
         <button type="submit" class="btn btn-success">Salvar <i class='bx bx-save'></i></button>
     </div>
 </form>
+<!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 

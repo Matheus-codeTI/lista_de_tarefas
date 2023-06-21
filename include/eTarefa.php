@@ -1,5 +1,5 @@
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
-<!--EMAIL : matheusaraujo72025@gmail.com--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 
 <?php
 
 include '../config/conexao.php';
@@ -39,4 +39,4 @@ if (mysqli_query($con, $excluirTarefa)) {
 }
 ?>
 <!--DESENVOLVIDO POR MATHEUS ARAUJO DOS SANTOS--> 
-<!--EMAIL : matheusaraujo72025@gmail.com--> 
+<!--EMAIL : matheusaraujo7562@gmail.com--> 
