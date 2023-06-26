@@ -7,12 +7,11 @@ include '../config/func.php';
 
 $login = $_POST['login'];
 $senha = $_POST['senha'];
-$confirmacaoSenha = md5($_POST['confirmacao_Senha']);
 
 $cadastraLogin = "INSERT INTO login values(null,
                                     '$login',
                                     '$senha',
-                                    '$confirmacaoSenha')";
+                                    'a')";
 if (mysqli_query($con, $cadastraLogin)) {
     $msg = 'Login cadastrado com sucesso';
     $acao = 0;
