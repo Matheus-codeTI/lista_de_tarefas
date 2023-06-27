@@ -310,9 +310,11 @@ include './include/seguranca.php';
                                 <div id="password-feedback"></div>
                             </div>
                         </div>
-                        <button id="botao" type="submit" class="btn btn-primary mt-3">Cadastrar <i class='bx bx-save'></i></button>
+                        <div class="d-flex justify-content-end">
+                            <button id="botao" type="submit" class="btn btn-primary mt-3">Cadastrar <i class='bx bx-save'></i></button>
+                        </div>
+                        <span style="color: red; font-size: 12px;">Obrigatório *</span>
                     </form>
-                    <span style="color: red; font-size: 12px;">Obrigatório *</span>
                 </div>
             </div>
             <div class="col-lg-8 col-md-12 col-sm-12">
